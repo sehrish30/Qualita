@@ -1,17 +1,94 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+<ion-header [translucent]="true" class="toolbar">
+  <ion-toolbar class="toolbar">
+    <ion-icon
+      class="icon"
+      name="filter-outline"
+      slot="end"
+      size="large"
+    ></ion-icon>
+    <ion-icon class="icon" name="add" slot="end" size="large"></ion-icon>
+    <ion-title> Home </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="content">
   <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+    <ion-toolbar class="toolbar">
+      <ion-title size="large">Home</ion-title>
+      <ion-icon
+        class="icon"
+        name="filter-outline"
+        slot="end"
+        size="large"
+      ></ion-icon>
+      <ion-icon class="icon" name="add" slot="end" size="large"></ion-icon>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div padding>
+    <ion-segment [(ngModel)]="showSegment">
+      <ion-segment-button value="amazon">
+        <ion-label class="label">Amazon</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="alibaba">
+        <ion-label class="label">Alibaba</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="showSegment">
+    <div *ngSwitchCase="'amazon'">
+      <ion-card
+        class="product"
+        *ngFor="let product of FBSrv.amazonProducts | async; let i=index"
+      >
+        <ion-card-header class="product-header">
+          <ion-card-subtitle class="product-header-image"
+            ><img src="{{product.image}}" alt="product scraped from amazon"
+          /></ion-card-subtitle>
+          <ion-card-title class="product-title"
+            >{{product.title.slice(0,40)}}...</ion-card-title
+          >
+          <ion-icon
+            class="icon-fav"
+            name="heart-outline"
+            size="large"
+          ></ion-icon>
+        </ion-card-header>
+
+        <ion-card-content class="product-body">
+          {{product.rating.slice(0, 3)}}
+          <ion-icon name="star" class="star"></ion-icon>
+          <span>{{product.price}}</span>$
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div *ngSwitchCase="'alibaba'">
+      <ion-card
+        class="product"
+        *ngFor="let product of FBSrv.alibabaProducts | async; let i=index"
+      >
+        <ion-card-header class="product-header">
+          <ion-card-subtitle class="product-header-image"
+            ><img src="{{product.image}}" alt="product scraped from amazon"
+          /></ion-card-subtitle>
+          <ion-card-title class="product-title"
+            >{{product.title.slice(0,30)}}...</ion-card-title
+          >
+          <ion-icon
+            class="icon-fav"
+            name="heart-outline"
+            size="large"
+          ></ion-icon>
+        </ion-card-header>
+
+        <ion-card-content class="product-body-alibaba">
+          {{product.rating}}
+          <ion-icon name="star" class="star"></ion-icon>
+          <span>{{product.price}}</span>$
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
 </ion-content>
