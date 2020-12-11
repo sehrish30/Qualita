@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { AngularFireModule } from 'angularfire2';
 // import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDxoKIJ5JapoI2XR3cRRvu11bTbtnKK8PI',
@@ -31,6 +32,7 @@ const firebaseConfig = {
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule.enablePersistence(),
+    AngularFireAuthModule,
   ],
   providers: [
     StatusBar,

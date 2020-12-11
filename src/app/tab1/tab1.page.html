@@ -26,7 +26,7 @@
   </ion-header>
 
   <div padding>
-    <ion-segment [(ngModel)]="showSegment">
+    <ion-segment [(ngModel)]="showSegment" color="medium">
       <ion-segment-button value="amazon">
         <ion-label class="label">Amazon</ion-label>
       </ion-segment-button>
@@ -56,7 +56,7 @@
           ></ion-icon>
         </ion-card-header>
 
-        <ion-card-content class="product-body">
+        <ion-card-content class="ion-text-center product-body">
           {{product.rating.slice(0, 3)}}
           <ion-icon name="star" class="star"></ion-icon>
           <span>{{product.price}}</span>$
@@ -83,7 +83,7 @@
           ></ion-icon>
         </ion-card-header>
 
-        <ion-card-content class="product-body-alibaba">
+        <ion-card-content class="ion-text-center product-body">
           {{product.rating}}
           <ion-icon name="star" class="star"></ion-icon>
           <span>{{product.price}}</span>$

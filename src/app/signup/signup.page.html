@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar class="toolbar" color="secondary">
+    <ion-buttons>
+      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-title> Signup </ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="secondary">
+  <ion-list
+    color="secondary"
+    lines="none"
+    class="ion-text-center ion-no-padding"
+  >
+    <ion-list-header
+      color="secondary"
+      class="ion-no-padding ion-padding-bottom"
+      lines="none"
+    >
+      <ion-label class="signup-title" color="warning"> QualiTa </ion-label>
+    </ion-list-header>
+  </ion-list>
+  <ion-item color="success" class="ion-align-items-center">
+    <ion-label position="floating"> Username </ion-label>
+    <ion-input type="text" name="name" [(ngModel)]="user.name" required>
+    </ion-input>
+  </ion-item>
+  <ion-item color="success">
+    <ion-label position="floating">Email</ion-label>
+    <ion-input
+      type="email"
+      name="email"
+      [(ngModel)]="user.email"
+      required
+    ></ion-input>
+  </ion-item>
+  <ion-item color="success">
+    <ion-label position="floating">Password</ion-label>
+    <ion-input
+      type="password"
+      name="password"
+      [(ngModel)]="user.password"
+      required
+    ></ion-input>
+  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button
+          (click)="signUp(user.name, user.email, user.password)"
+          expand="block"
+          color="warning"
+          class="signup-button"
+          >Sign up</ion-button
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-router-link color="warning" routerLink="/signin">
+          Already have an account?
+        </ion-router-link>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <img
+    class="signup-image"
+    alt="style with effect"
+    src="../../assets/smoke.png"
+  />
+</ion-content>

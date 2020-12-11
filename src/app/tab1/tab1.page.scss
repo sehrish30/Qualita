@@ -38,23 +38,12 @@ div {
     display: flex;
 
     &-image {
-      height: 4rem;
-      width: 4rem;
+      height: 5rem;
+      width: 5rem;
       object-fit: cover;
     }
   }
   &-body {
-    width: 10rem;
-    height: 2rem;
-    margin: 0 auto;
-    color: #3c3a4c;
-    font-weight: bold;
-    font-size: 1rem;
-  }
-  &-body-alibaba {
-    width: 20rem;
-    height: 2rem;
-    margin: 0 auto;
     color: #3c3a4c;
     font-weight: bold;
     font-size: 1rem;
