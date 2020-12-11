@@ -37,7 +37,7 @@ export class FbService {
     /*-------------------------------------------
               Context Provider
   ---------------------------------------------- */
-    // this.currentUser = this.afAuth.authState;
+    this.currentUser = this.afAuth.authState;
     const authObserver = this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.currentUser = user;
@@ -110,6 +110,21 @@ export class FbService {
       errors.password = 'Your password is required';
     } else if (user.password.length < 6) {
       errors.password = 'Password must be atleast 6 characters';
+    }
+
+    return errors;
+  }
+
+  /*-------------------------------------------
+              Validate Forgot password
+  ---------------------------------------------- */
+  validateForgotPass(user) {
+    const errors: User = {} as User;
+
+    if (!user.email) {
+      errors.email = 'Your email is invalid';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(user.email)) {
+      errors.email = 'You email is invalid';
     }
 
     return errors;

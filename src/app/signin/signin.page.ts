@@ -10,6 +10,7 @@ import { FbService, User } from './../fb.service';
   styleUrls: ['./signin.page.scss'],
 })
 export class SigninPage implements OnInit {
+  public stop = false;
   constructor(
     public navCtrl: NavController,
     public fbSrv: FbService,
@@ -41,6 +42,7 @@ export class SigninPage implements OnInit {
   }
 
   async signIn(email, password) {
+    this.stop = true;
     const validationErrors = this.fbSrv.validateSignIn(this.user);
     if (!Object.keys(validationErrors).length) {
       this.presentLoading();
@@ -48,15 +50,20 @@ export class SigninPage implements OnInit {
         .signInWithEmailAndPassword(email, password)
         .then((response) => {
           this.presentToast('You have successfully signed in');
+          this.stop = false;
           this.navCtrl.navigateBack('/');
         })
         .catch((err) => {
           console.error('Login Error', err);
           this.presentToast(err.message);
+          this.stop = false;
         });
+
+      this.user = { name: '', email: '', password: '' };
     } else {
       // Object.values creates an array and joins form a string with a gap
       this.presentToast(Object.values(validationErrors).join(' '));
+      this.stop = false;
     }
   }
 }

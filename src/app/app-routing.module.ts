@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('./forgot/forgot.module').then((m) => m.ForgotPageModule),
   },
+  {
+    path: 'edit-profile',
+    loadChildren: () => import('./edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
+  },
 ];
 @NgModule({
   imports: [

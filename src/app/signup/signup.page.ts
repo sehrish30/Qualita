@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
+  public stop = false;
   constructor(
     public fbSrv: FbService,
     public toastController: ToastController,
@@ -49,6 +50,7 @@ export class SignupPage implements OnInit {
     if (Object.values(validationErrors).every((x) => x === null || x === '')) {
       this.presentLoading();
       try {
+        this.stop = true;
         const newUser = await this.afAuth.auth.createUserWithEmailAndPassword(
           email,
           password
@@ -59,9 +61,11 @@ export class SignupPage implements OnInit {
         const msg = 'You have successfully signed up';
         this.presentToast(msg);
         this.router.navigateByUrl('/');
+        this.stop = false;
       } catch (err) {
         console.error('Registeration error', err);
         this.presentToast(err.message);
+        this.stop = false;
       }
 
       this.user = { name: '', email: '', password: '' };

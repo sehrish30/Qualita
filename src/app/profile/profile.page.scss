@@ -2,3 +2,16 @@
   --background: #3c3a4c;
   color: #d8cea3;
 }
+
+.profile {
+  &-dp {
+    height: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+  }
+  &-style {
+    height: 35vh;
+    width: 100%;
+    object-fit: fill;
+  }
+}

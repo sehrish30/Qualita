@@ -2,9 +2,30 @@
   <ion-toolbar class="toolbar" color="secondary">
     <ion-buttons>
       <ion-back-button defaultHref="/"></ion-back-button>
-      <ion-title> Forgot Password </ion-title>
+      <ion-title> Reset Password </ion-title>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+<ion-content color="secondary">
+  <ion-item color="success" class="ion-align-items-center">
+    <ion-label position="floating"> Email </ion-label>
+    <ion-input type="email" name="email" [(ngModel)]="user.email" required>
+    </ion-input>
+  </ion-item>
+
+  <ion-row>
+    <ion-col>
+      <ion-button
+        expand="block"
+        type="submit"
+        color="warning"
+        disabled="{{stop}}"
+        (click)="resetPassword(user.email)"
+        class="btn_forget"
+      >
+        Get reset Link
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>
