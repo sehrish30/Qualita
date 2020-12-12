@@ -17,6 +17,13 @@ export interface User {
   password: string;
 }
 
+export interface editUser {
+  name: string;
+  email: string;
+  newPassword: string;
+  currentPassword: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -125,6 +132,36 @@ export class FbService {
       errors.email = 'Your email is invalid';
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(user.email)) {
       errors.email = 'You email is invalid';
+    }
+
+    return errors;
+  }
+
+  /*-------------------------------------------
+              Validate Edit Profile
+  ---------------------------------------------- */
+
+  validateEditPage(user) {
+    const errors: editUser = {} as editUser;
+
+    if (!user.name) {
+      errors.name = 'A username is required';
+    }
+
+    if (!user.email) {
+      errors.email = 'Your email is invalid';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(user.email)) {
+      errors.email = 'You email is invalid';
+    }
+
+    if (!user.currentPassword) {
+      errors.currentPassword = 'Your password is required';
+    } else if (user.currentPassword.length < 6) {
+      errors.currentPassword = 'Password must be atleast 6 characters';
+    }
+
+    if (user.newPassword && user.newPassword.length < 6) {
+      errors.newPassword = 'Password must be atleast 6 characters';
     }
 
     return errors;

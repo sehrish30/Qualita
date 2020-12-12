@@ -1,11 +1,13 @@
 <ion-header translucent="true" class="toolbar">
   <ion-toolbar class="toolbar">
-    <ion-buttons collapse="true" slot="end">
+    <ion-buttons collapse="true" slot="end" class="btn">
       <ion-icon
+        routerLink="/edit-profile"
         name="create-outline"
         collapse="true"
         slot="end"
         size="large"
+        class="btn"
       ></ion-icon>
     </ion-buttons>
     <ion-title> Profile </ion-title>
@@ -19,12 +21,14 @@
 <ion-content [fullscreen]="true" color="primary">
   <ion-header collapse="condense">
     <ion-toolbar class="toolbar">
-      <ion-buttons collapse="true" slot="end">
+      <ion-buttons collapse="true" slot="end" class="btn">
         <ion-icon
+          routerLink="/edit-profile"
           name="create-outline"
           collapse="true"
           slot="end"
           size="large"
+          class="btn"
         ></ion-icon>
       </ion-buttons>
       <ion-title size="large">Profile</ion-title>

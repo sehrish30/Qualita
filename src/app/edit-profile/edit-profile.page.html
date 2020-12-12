@@ -1,9 +1,57 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>editProfile</ion-title>
+  <ion-toolbar class="toolbar" color="secondary">
+    <ion-buttons>
+      <ion-back-button defaultHref="/tabs/tab4"></ion-back-button>
+      <ion-title> EditProfilePage</ion-title>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="secondary">
+  <ion-item color="success" class="ion-align-items-center">
+    <ion-label position="floating"> Username </ion-label>
+    <ion-input type="text" name="name" [(ngModel)]="user.name" required>
+    </ion-input>
+  </ion-item>
+  <ion-item color="success">
+    <ion-label position="floating">Email</ion-label>
+    <ion-input name="email" [(ngModel)]="user.email" required></ion-input>
+  </ion-item>
 
+  <ion-item color="success">
+    <ion-label position="floating">NewPassword</ion-label>
+    <ion-input
+      name="password"
+      type="password"
+      [(ngModel)]="user.newPassword"
+    ></ion-input>
+  </ion-item>
+  <ion-item color="success">
+    <ion-label position="floating">CurrentPassword</ion-label>
+    <ion-input
+      name="password"
+      type="password"
+      [(ngModel)]="user.currentPassword"
+      required
+    ></ion-input>
+  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button
+          (click)="editProfile(user.name, user.email, user.currentPassword, user.newPassword)"
+          expand="block"
+          color="warning"
+          class="signin-button"
+          disabled="{{stop}}"
+          >Edit Profile</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <img
+    class="signin-image"
+    alt="style with effect"
+    src="../../assets/smoke.png"
+  />
 </ion-content>

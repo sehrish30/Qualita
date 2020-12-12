@@ -38,7 +38,7 @@ export class SigninPage implements OnInit {
     });
     await loading.present();
 
-    const { role, data } = await loading.onDidDismiss();
+    await loading.onDidDismiss();
   }
 
   async signIn(email, password) {
