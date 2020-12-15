@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { FbService } from './../fb.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
@@ -24,7 +24,7 @@ export class ForgotPage implements OnInit {
   async presentToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
-      duration: 5000,
+      duration: 4000,
       color: 'dark',
     });
     toast.present();
@@ -35,7 +35,7 @@ export class ForgotPage implements OnInit {
     const validationErrors = this.fbSrv.validateForgotPass(this.user);
     // Object.keys because if no error {} will be return
     if (!Object.keys(validationErrors).length) {
-      this.afAuth.auth
+      this.afAuth
         .sendPasswordResetEmail(email)
         .then((response) => {
           this.presentToast('Check your email to reset Password');

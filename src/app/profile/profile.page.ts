@@ -1,5 +1,5 @@
 import { NavController, ToastController } from '@ionic/angular';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Component, OnInit } from '@angular/core';
 import { FbService } from './../fb.service';
 
@@ -21,14 +21,14 @@ export class ProfilePage implements OnInit {
   async presentToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
-      duration: 5000,
+      duration: 4000,
       color: 'dark',
     });
     toast.present();
   }
 
   async logout() {
-    await this.afAuth.auth.signOut();
+    await this.afAuth.signOut();
     this.presentToast('Successfully Signed Out');
     this.navCtrl.navigateForward('/signin');
   }

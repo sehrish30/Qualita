@@ -1,7 +1,7 @@
 import { FbService, User } from './../fb.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { LoadingController } from '@ionic/angular';
 
 import { Router } from '@angular/router';
@@ -39,7 +39,7 @@ export class SignupPage implements OnInit {
   async presentToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
-      duration: 5000,
+      duration: 4000,
       color: 'dark',
     });
     toast.present();
@@ -51,7 +51,7 @@ export class SignupPage implements OnInit {
       this.presentLoading();
       try {
         this.stop = true;
-        const newUser = await this.afAuth.auth.createUserWithEmailAndPassword(
+        const newUser = await this.afAuth.createUserWithEmailAndPassword(
           email,
           password
         );

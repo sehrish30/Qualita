@@ -1,10 +1,9 @@
 import { NavController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Observable, of } from 'rxjs';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 export interface Comment {
   Name: string;
@@ -28,7 +27,7 @@ export interface editUser {
   providedIn: 'root',
 })
 export class FbService {
-  public currentUser: Observable<any>;
+  public currentUser;
 
   amazonRef: AngularFirestoreCollection;
   alibabaRef: AngularFirestoreCollection<any>;
@@ -48,6 +47,7 @@ export class FbService {
     const authObserver = this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.currentUser = user;
+        console.log(this.currentUser.photoURL);
         this.navCtrl.navigateForward('/');
         authObserver.unsubscribe();
       } else {
@@ -65,6 +65,9 @@ export class FbService {
     this.alibabaRef = this.firestore.collection('alibaba');
     this.amazonProducts = this.amazonRef.valueChanges();
     this.alibabaProducts = this.alibabaRef.valueChanges();
+
+    // amazonProducts: Observable<any>
+    // this.amazonProducts = this.firestore.collection('alibaba').valueChanges()
   }
 
   // for inserting in firebase

@@ -52,7 +52,7 @@
           <ion-card-subtitle class="product-header-image"
             ><img src="{{product.image}}" alt="product scraped from amazon"
           /></ion-card-subtitle>
-          <ion-card-title class="product-title"
+          <ion-card-title color="tertiary" class="product-title"
             >{{product.title.slice(0,40)}}...</ion-card-title
           >
           <ion-icon
@@ -62,10 +62,10 @@
           ></ion-icon>
         </ion-card-header>
 
-        <ion-card-content class="ion-text-center product-body">
+        <ion-card-content color="tertiary" class="ion-text-center product-body">
           {{product.rating.slice(0, 3)}}
           <ion-icon name="star" class="star"></ion-icon>
-          <span>{{product.price}}</span>$
+          <span color="tertiary">{{product.price}}</span>$
         </ion-card-content>
       </ion-card>
     </div>
@@ -79,7 +79,7 @@
           <ion-card-subtitle class="product-header-image"
             ><img src="{{product.image}}" alt="product scraped from amazon"
           /></ion-card-subtitle>
-          <ion-card-title class="product-title"
+          <ion-card-title color="tertiary" class="product-title"
             >{{product.title.slice(0,30)}}...</ion-card-title
           >
           <ion-icon
@@ -89,10 +89,10 @@
           ></ion-icon>
         </ion-card-header>
 
-        <ion-card-content class="ion-text-center product-body">
+        <ion-card-content color="tertiary" class="ion-text-center product-body">
           {{product.rating}}
           <ion-icon name="star" class="star"></ion-icon>
-          <span>{{product.price}}</span>$
+          <span color="tertiary">{{product.price}}</span>$
         </ion-card-content>
       </ion-card>
     </div>

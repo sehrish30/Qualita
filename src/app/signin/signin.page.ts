@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, ToastController } from '@ionic/angular';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { LoadingController } from '@ionic/angular';
 import { FbService, User } from './../fb.service';
 
@@ -24,7 +24,7 @@ export class SigninPage implements OnInit {
   async presentToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
-      duration: 5000,
+      duration: 4000,
       color: 'dark',
     });
     toast.present();
@@ -46,7 +46,7 @@ export class SigninPage implements OnInit {
     const validationErrors = this.fbSrv.validateSignIn(this.user);
     if (!Object.keys(validationErrors).length) {
       this.presentLoading();
-      this.afAuth.auth
+      this.afAuth
         .signInWithEmailAndPassword(email, password)
         .then((response) => {
           this.presentToast('You have successfully signed in');

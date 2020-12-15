@@ -1,4 +1,4 @@
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 
 import {
@@ -37,7 +37,7 @@ export class EditProfilePage implements OnInit {
   async presentToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
-      duration: 5000,
+      duration: 4000,
       color: 'dark',
     });
     toast.present();
@@ -91,7 +91,7 @@ export class EditProfilePage implements OnInit {
       /*--------------------------------------
               Sign in user
         -------------------------------------- */
-      const result = await this.afAuth.auth.signInWithEmailAndPassword(
+      const result = await this.afAuth.signInWithEmailAndPassword(
         email,
         newPassword || currentPassword
       );

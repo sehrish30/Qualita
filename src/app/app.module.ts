@@ -9,10 +9,19 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { AngularFireModule } from 'angularfire2';
-// import { AngularFireDatabaseModule } from "angularfire2/database";
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+// import { AngularFireModule } from 'angularfire2';
+// // import { AngularFireDatabaseModule } from "angularfire2/database";
+// import { AngularFirestoreModule } from 'angularfire2/firestore';
+// import { AngularFireAuthModule } from 'angularfire2/auth';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
+
+//NEW
+// import { AngularFirestoreModule } from "@angular/fire/firestore";
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDxoKIJ5JapoI2XR3cRRvu11bTbtnKK8PI',
@@ -31,8 +40,9 @@ const firebaseConfig = {
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule.enablePersistence(),
-    AngularFireAuthModule,
+    AngularFirestoreModule, // firestore
+    AngularFireAuthModule, // auth
+    AngularFireStorageModule, // storage
   ],
   providers: [
     StatusBar,
