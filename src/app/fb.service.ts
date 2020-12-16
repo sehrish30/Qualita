@@ -48,9 +48,10 @@ export class FbService {
       if (user) {
         this.currentUser = user;
         console.log(this.currentUser.photoURL);
-        this.navCtrl.navigateForward('/');
+        // this.navCtrl.navigateForward('/');
         authObserver.unsubscribe();
       } else {
+        console.log('USER');
         this.currentUser = null;
         this.navCtrl.navigateRoot('/signin');
         authObserver.unsubscribe();
@@ -61,10 +62,14 @@ export class FbService {
               Firebase Collections
   ---------------------------------------------- */
 
-    this.amazonRef = this.firestore.collection('amazon');
-    this.alibabaRef = this.firestore.collection('alibaba');
-    this.amazonProducts = this.amazonRef.valueChanges();
-    this.alibabaProducts = this.alibabaRef.valueChanges();
+    this.amazonRef = firestore.collection('amazon');
+    this.alibabaRef = firestore.collection('alibaba');
+    this.amazonProducts = this.amazonRef.valueChanges({
+      idField: 'propertyId',
+    });
+    this.alibabaProducts = this.alibabaRef.valueChanges({
+      idField: 'propertyId',
+    });
 
     // amazonProducts: Observable<any>
     // this.amazonProducts = this.firestore.collection('alibaba').valueChanges()

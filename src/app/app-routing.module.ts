@@ -34,6 +34,13 @@ const routes: Routes = [
         (m) => m.EditProfilePageModule
       ),
   },
+  {
+    path: 'product-detail/:productId',
+    loadChildren: () =>
+      import('./product-detail/product-detail.module').then(
+        (m) => m.ProductDetailPageModule
+      ),
+  },
 ];
 @NgModule({
   imports: [

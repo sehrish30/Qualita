@@ -1,0 +1,14 @@
+.product-star {
+  color: #fdb827;
+}
+
+.product-bold {
+  font-weight: bold;
+}
+
+.bg-color {
+  // background-image: url('../../assets/purple_smoke.png');
+  // background-color: #fdb827;
+  --background: #3c3653 url('../../assets/purple_smoke.png') no-repeat right;
+  background-size: cover;
+}

@@ -1,0 +1,47 @@
+<ion-header [translucent]="true" class="toolbar">
+  <ion-toolbar class="toolbar">
+    <ion-buttons collapse="true" slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title> {{product.title?.slice(0,10)}}...</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-color">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="ion-padding-bottom"
+        ><ion-img alt="Product" src="{{product.image}}"></ion-img
+      ></ion-card-title>
+      <ion-card-subtitle color="warning">{{product.title}}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content class="ion-no-padding">
+      <ion-row>
+        <ion-col>
+          {{product.rating}}<ion-icon
+            name="star"
+            class="product-star"
+          ></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-text color="warning" class="product-bold"
+            >{{product.price}}$</ion-text
+          >
+        </ion-col>
+        <ion-col>
+          <ion-icon size="large" name="heart-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+    <ion-row
+      class="ion-float-right ion-no-padding ion-padding-bottom ion-padding-horizontal"
+    >
+      <ion-col>
+        <ion-fab-button color="primary"
+          ><ion-icon name="chatbubble-outline"></ion-icon
+        ></ion-fab-button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>
