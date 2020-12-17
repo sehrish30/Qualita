@@ -30,7 +30,12 @@
           >
         </ion-col>
         <ion-col>
-          <ion-icon size="large" name="heart-outline"></ion-icon>
+          <ion-icon
+            class="icon-fav"
+            [name]="FBSrv.starredItems.includes(product.itemID)? 'heart': 'heart-outline'"
+            size="large"
+            (click)="FBSrv.addFavToLocalStorage(product.itemID, product)"
+          ></ion-icon>
         </ion-col>
       </ion-row>
     </ion-card-content>

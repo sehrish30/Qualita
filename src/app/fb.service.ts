@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Storage } from '@ionic/storage';
 
 export interface Comment {
   Name: string;
@@ -28,6 +29,9 @@ export interface editUser {
 })
 export class FbService {
   public currentUser;
+  public starredItems: any[] = [];
+  public checkStarredItems;
+  public starredProducts = [];
 
   amazonRef: AngularFirestoreCollection;
   alibabaRef: AngularFirestoreCollection<any>;
@@ -38,7 +42,8 @@ export class FbService {
   constructor(
     public firestore: AngularFirestore,
     public afAuth: AngularFireAuth,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public storage: Storage
   ) {
     /*-------------------------------------------
               Context Provider
@@ -173,5 +178,72 @@ export class FbService {
     }
 
     return errors;
+  }
+
+  /*-------------------------------------------
+    Get Starred Items tarred Items from local storage
+  ---------------------------------------------- */
+  async getStarredItems() {
+    try {
+      const data = await this.storage.get('id');
+      if (data) {
+        this.starredItems = data;
+        console.log('I collect it here', this.starredItems);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  /*-------------------------------------------
+      Set  Starred Items from local storage
+  ---------------------------------------------- */
+  async setStarredItems() {
+    this.storage.set('id', this.starredItems);
+  }
+
+  /*-------------------------------------------
+                 add to Fav
+  ---------------------------------------------- */
+  async addFavToLocalStorage(id, product) {
+    const index = this.starredItems.indexOf(id);
+    if (index > -1) {
+      this.starredItems.splice(index, 1);
+      this.starredProducts.splice(index, 1);
+    } else {
+      this.starredItems.push(id);
+      this.starredProducts.push(product);
+    }
+    this.setStarredItems();
+  }
+
+  /*-------------------------------------------
+    Get Fav Products from firebase
+  ---------------------------------------------- */
+  getStarredProducts() {
+    this.starredProducts = [];
+    this.checkStarredItems = this.amazonProducts.subscribe((collection) => {
+      for (const doc of collection) {
+        for (const stars of this.starredItems) {
+          if (Number(doc.itemID) === Number(stars)) {
+            this.starredProducts.push(doc);
+            break;
+          }
+        }
+      }
+      this.checkStarredItems.unsubscribe();
+    });
+
+    this.checkStarredItems = this.alibabaProducts.subscribe((collection) => {
+      for (const doc of collection) {
+        for (const stars of this.starredItems) {
+          if (Number(doc.itemID) === Number(stars)) {
+            this.starredProducts.push(doc);
+            break;
+          }
+        }
+      }
+      this.checkStarredItems.unsubscribe();
+    });
   }
 }

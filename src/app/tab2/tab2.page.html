@@ -1,15 +1,52 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="toolbar">
+    <ion-buttons (click)="deleteAllStarred()" collapse="true" slot="end">
+      <ion-icon slot="end" size="large" name="trash-outline"></ion-icon>
+    </ion-buttons>
     <ion-title> Favorites </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" color="primary">
   <ion-header collapse="condense">
     <ion-toolbar class="toolbar">
-      <ion-title size="large">Favorites</ion-title>
+      <ion-buttons
+        collapse="true"
+        slot="end"
+        size="large"
+        (click)="presentAlertConfirm()"
+      >
+        <ion-icon size="large" slot="end" name="trash-outline"></ion-icon>
+      </ion-buttons>
+      <ion-title>Favorites</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-card
+    class="product"
+    *ngFor="let product of FBSrv.starredProducts ; let i=index"
+    routerLink="/product-detail/{{product.itemID}}"
+  >
+    <ion-card-header class="product-header">
+      <ion-card-subtitle class="product-header-image"
+        ><img src="{{product.image}}" alt="product scraped from amazon"
+      /></ion-card-subtitle>
+      <ion-card-title color="tertiary" class="product-title"
+        >{{product.title.slice(0,40)}}...</ion-card-title
+      >
+
+      <ion-icon
+        class="icon-fav"
+        [name]="FBSrv.starredItems.includes(product.itemID)? 'heart': 'heart-outline'"
+        size="large"
+        (click)="FBSrv.addFavToLocalStorage(product.itemID, product)"
+      ></ion-icon>
+    </ion-card-header>
+
+    <ion-card-content color="tertiary" class="ion-text-center product-body">
+      {{product.rating.slice(0, 3)}}
+      <ion-icon name="star" class="star"></ion-icon>
+      <span color="tertiary">{{product.price}}</span>$
+    </ion-card-content>
+  </ion-card>
 </ion-content>

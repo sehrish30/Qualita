@@ -15,7 +15,7 @@ export class ProductDetailPage implements OnInit {
   constructor(
     public firestore: AngularFirestore,
     public activatedrouter: ActivatedRoute,
-    public fbSrv: FbService
+    public FBSrv: FbService
   ) {
     /*------------------------------------
       Get id from route
@@ -25,14 +25,14 @@ export class ProductDetailPage implements OnInit {
     /*------------------------------------
        Collect product details from firebase
     -------------------------------------- */
-    fbSrv.amazonRef
+    FBSrv.amazonRef
       .doc(this.index)
       .ref.get()
       .then((doc) => {
         if (doc.exists) {
           this.product = { ...doc.data(), id: doc.id };
         } else {
-          fbSrv.alibabaRef
+          FBSrv.alibabaRef
             .doc(this.index)
             .ref.get()
             .then((alibabadoc) => {

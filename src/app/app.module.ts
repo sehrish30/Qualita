@@ -7,6 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
+import { IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
 
 // import { AngularFireModule } from 'angularfire2';
@@ -38,6 +39,7 @@ const firebaseConfig = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule, // firestore

@@ -5,6 +5,7 @@ import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 // import { AngularFireAuth } from 'angularfire2/auth';
 // import { Observable } from 'rxjs/Observable';
+import { Storage } from '@ionic/storage';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
@@ -15,16 +16,16 @@ import { LoadingController } from '@ionic/angular';
 export class Tab1Page {
   // comments: Comment;
   public showSegment = 'amazon';
+  public starred = [];
 
   constructor(
     public FBSrv: FbService,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    public storage: Storage
   ) {
     // this.comments = {} as Comment;
     this.presentLoading();
-    if (this.showSegment === 'alibaba') {
-      this.presentLoading();
-    }
+    FBSrv.getStarredItems();
   }
 
   async presentLoading() {

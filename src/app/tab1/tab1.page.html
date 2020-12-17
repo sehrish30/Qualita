@@ -56,10 +56,12 @@
           <ion-card-title color="tertiary" class="product-title"
             >{{product.title.slice(0,40)}}...</ion-card-title
           >
+
           <ion-icon
             class="icon-fav"
-            name="heart-outline"
+            [name]="FBSrv.starredItems.includes(product.itemID)? 'heart': 'heart-outline'"
             size="large"
+            (click)="FBSrv.addFavToLocalStorage(product.itemID, product)"
           ></ion-icon>
         </ion-card-header>
 
@@ -86,8 +88,9 @@
           >
           <ion-icon
             class="icon-fav"
-            name="heart-outline"
+            [name]="FBSrv.starredItems.includes(product.itemID)? 'heart': 'heart-outline'"
             size="large"
+            (click)="FBSrv.addFavToLocalStorage(product.itemID, product)"
           ></ion-icon>
         </ion-card-header>
 
