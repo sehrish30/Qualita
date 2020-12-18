@@ -3,7 +3,7 @@
     <ion-buttons collapse="true" slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title> {{product.title?.slice(0,10)}}...</ion-title>
+    <ion-title> {{FBSrv.product.title?.slice(0,10)}}...</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,30 +11,32 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title class="ion-padding-bottom"
-        ><ion-img alt="Product" src="{{product.image}}"></ion-img
+        ><ion-img alt="Product" src="{{FBSrv.product.image}}"></ion-img
       ></ion-card-title>
-      <ion-card-subtitle color="warning">{{product.title}}</ion-card-subtitle>
+      <ion-card-subtitle color="warning"
+        >{{FBSrv.product.title}}</ion-card-subtitle
+      >
     </ion-card-header>
 
     <ion-card-content class="ion-no-padding">
       <ion-row>
         <ion-col>
-          {{product.rating}}<ion-icon
+          {{FBSrv.product.rating}}<ion-icon
             name="star"
             class="product-star"
           ></ion-icon>
         </ion-col>
         <ion-col>
           <ion-text color="warning" class="product-bold"
-            >{{product.price}}$</ion-text
+            >{{FBSrv.product.price}}$</ion-text
           >
         </ion-col>
         <ion-col>
           <ion-icon
             class="icon-fav"
-            [name]="FBSrv.starredItems.includes(product.itemID)? 'heart': 'heart-outline'"
+            [name]="FBSrv.starredItems.includes(FBSrv.product.itemID)? 'heart': 'heart-outline'"
             size="large"
-            (click)="FBSrv.addFavToLocalStorage(product.itemID, product)"
+            (click)="FBSrv.addFavToLocalStorage(FBSrv.product.itemID, FBSrv.product)"
           ></ion-icon>
         </ion-col>
       </ion-row>
@@ -43,10 +45,52 @@
       class="ion-float-right ion-no-padding ion-padding-bottom ion-padding-horizontal"
     >
       <ion-col>
-        <ion-fab-button color="primary"
+        <ion-fab-button
+          color="primary"
+          (click)="addLike(FBSrv.product.itemID)"
+          class="upvote-count"
+        >
+          <div class="upvote-count">
+            {{FBSrv.product.voteCount || 0}}
+            <ion-icon name="caret-up-outline" size="small"></ion-icon>
+          </div>
+        </ion-fab-button>
+      </ion-col>
+      <ion-col>
+        <ion-fab-button
+          color="primary"
+          (click)="presentModal(_, FBSrv.product.itemID)"
           ><ion-icon name="chatbubble-outline"></ion-icon
         ></ion-fab-button>
       </ion-col>
     </ion-row>
   </ion-card>
+  <ion-list-header class="ion-text-center ion-text-capitalize ion-no-padding">
+    <ion-label color="light"
+      >{{FBSrv.product.comments?.length || "No"}}{{" "}}Comments</ion-label
+    >
+  </ion-list-header>
+  <ion-item color="warning" *ngFor="let comment of FBSrv.product.comments">
+    <ion-avatar slot="start">
+      <img src="./avatar-rey.png" />
+    </ion-avatar>
+    <ion-label>
+      <h5>{{comment.postedBy.name}}</h5>
+      <h3>{{comment.text}}</h3>
+    </ion-label>
+    <ion-fab-button
+      *ngIf="this.FBSrv.currentUser.uid === comment.postedBy.id"
+      size="small"
+      color="primary"
+      (click)="presentEditModal(comment.text, FBSrv.product.itemID, comment.created)"
+      ><ion-icon name="create-outline"></ion-icon
+    ></ion-fab-button>
+    <ion-fab-button
+      *ngIf="this.FBSrv.currentUser.uid === comment.postedBy.id"
+      (click)="handleDeleteComment(FBSrv.product.itemID, comment.created)"
+      size="small"
+      color="primary"
+      ><ion-icon name="trash-bin-outline"></ion-icon
+    ></ion-fab-button>
+  </ion-item>
 </ion-content>

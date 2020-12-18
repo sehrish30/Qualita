@@ -1,3 +1,5 @@
+import { EditCommentPageModule } from './edit-comment/edit-comment.module';
+import { CommentModalPageRoutingModule } from './comment-modal/comment-modal-routing.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -41,6 +43,8 @@ const firebaseConfig = {
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     AppRoutingModule,
+    CommentModalPageRoutingModule,
+    EditCommentPageModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth

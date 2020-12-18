@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>commentModal</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()">Close</ion-button> </ion-buttons
+    ><ion-buttons slot="end">
+      <ion-button (click)="handleSendAction()"> Send </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="warning">
+  <ion-textarea
+    class="ion-padding"
+    rows="25"
+    cols="25"
+    placeholder="Type Your comment here..."
+    [(ngModel)]="commentText"
+  ></ion-textarea>
+</ion-content>

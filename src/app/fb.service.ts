@@ -32,6 +32,7 @@ export class FbService {
   public starredItems: any[] = [];
   public checkStarredItems;
   public starredProducts = [];
+  public product = {};
 
   amazonRef: AngularFirestoreCollection;
   alibabaRef: AngularFirestoreCollection<any>;
@@ -52,6 +53,7 @@ export class FbService {
     const authObserver = this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.currentUser = user;
+        console.log(this.currentUser.uid);
         console.log(this.currentUser.photoURL);
         // this.navCtrl.navigateForward('/');
         authObserver.unsubscribe();

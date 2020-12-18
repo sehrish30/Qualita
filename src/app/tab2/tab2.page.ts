@@ -18,6 +18,10 @@ export class Tab2Page {
   ) {
     FBSrv.getStarredItems();
     FBSrv.getStarredProducts();
+    console.log(FBSrv.starredItems);
+    if (FBSrv.starredItems.length > 0) {
+      this.showNotFound = false;
+    }
   }
 
   deleteAllStarred() {

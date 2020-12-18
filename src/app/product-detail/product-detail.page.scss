@@ -12,3 +12,10 @@
   --background: #3c3653 url('../../assets/purple_smoke.png') no-repeat right;
   background-size: cover;
 }
+
+.upvote-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}

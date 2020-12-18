@@ -41,6 +41,20 @@ const routes: Routes = [
         (m) => m.ProductDetailPageModule
       ),
   },
+  {
+    path: 'comment-modal/:productId',
+    loadChildren: () =>
+      import('./comment-modal/comment-modal.module').then(
+        (m) => m.CommentModalPageModule
+      ),
+  },
+  {
+    path: 'edit-comment',
+    loadChildren: () =>
+      import('./edit-comment/edit-comment.module').then(
+        (m) => m.EditCommentPageModule
+      ),
+  },
 ];
 @NgModule({
   imports: [
