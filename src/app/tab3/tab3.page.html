@@ -4,12 +4,82 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="search_bg">
   <ion-header collapse="condense">
     <ion-toolbar class="toolbar">
       <ion-title size="large">Search</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-searchbar
+    animated
+    color="medium"
+    [(ngModel)]="filter"
+    value="{{filter}}"
+    enterkeyhint="enter"
+    placeholder="Search..."
+    debounce="300"
+    (keydown)="handleChange($event)"
+    (ngModelChange)="handleTypeChanges($event)"
+  ></ion-searchbar>
+  <ion-row class="filter">
+    <ion-col>
+      <ion-item color="tertiary">
+        <ion-label>Price</ion-label>
+        <ion-select
+          [(ngModel)]="priceFilter"
+          (ngModelChange)="handleTypeChanges($event)"
+        >
+          <ion-select-option value="high"
+            >4.0 and Up<ion-icon class="star" name="star"></ion-icon
+          ></ion-select-option>
+          <ion-select-option value="low">2.0 and Up</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+    <ion-col
+      ><ion-item color="tertiary">
+        <ion-label>Rating</ion-label>
+        <ion-select
+          [(ngModel)]="ratingFilter"
+          (ngModelChange)="handleTypeChanges($event)"
+        >
+          <ion-select-option value="high">High</ion-select-option>
+          <ion-select-option value="low">Low</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-card
+    color="success"
+    *ngFor="let product of matchedProducts; let i = index"
+    routerLink="/product-detail/{{product.propertyId}}"
+  >
+    <ion-card-header>
+      <ion-row>
+        <ion-col class="ion-no-padding">
+          <ion-thumbnail>
+            <img src="{{product.image}}" />
+          </ion-thumbnail>
+        </ion-col>
+        <ion-col>
+          <ion-text class="ion-text-wrap">{{product.price}}$</ion-text>
+          <ion-text class="title-heading">
+            {{product.title.slice(0, 20)}}...</ion-text
+          >
+        </ion-col>
+        <ion-col class="ion-text-wrap">
+          <ion-text
+            >{{product.rating}}<ion-icon class="star" name="star"></ion-icon
+          ></ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-row>
+      <ion-col class="ion-no-padding ion-padding-start">
+        <ion-badge color="secondary">{{product.badge}}</ion-badge>
+      </ion-col>
+    </ion-row>
+  </ion-card>
 </ion-content>

@@ -28,6 +28,7 @@ export class CommentModalPage implements OnInit {
 
   handleSendAction() {
     if (!this.FBSrv.currentUser) {
+      this.dismiss();
       this.navCtrl.navigateRoot('/signin');
     } else {
       this.FBSrv.amazonRef
