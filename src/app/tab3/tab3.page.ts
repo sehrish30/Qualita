@@ -54,7 +54,17 @@ export class Tab3Page {
     this.handleTypeChanges(evt);
   }
 
-  saveSearchesToFirebase() {}
+  saveSearchesToFirebase() {
+    if (this.FBSrv.currentUser.uid) {
+      const data = {
+        userId: this.FBSrv.currentUser.uid,
+        userName: this.FBSrv.currentUser.uid,
+        searchTerm: this.filter,
+        time: new Date(),
+      };
+      this.FBSrv.searchHistoryRef.add(data);
+    }
+  }
 
   handleChange(evt) {
     if (evt.key === 'Enter') {

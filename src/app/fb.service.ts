@@ -39,6 +39,8 @@ export class FbService {
   comments: Observable<Comment[]>;
   amazonProducts: Observable<any>;
   alibabaProducts: Observable<any>;
+  searchHistoryRef: AngularFirestoreCollection<any>;
+  searchHistory: Observable<any>;
 
   constructor(
     public firestore: AngularFirestore,
@@ -71,6 +73,10 @@ export class FbService {
 
     this.amazonRef = firestore.collection('amazon');
     this.alibabaRef = firestore.collection('alibaba');
+    this.searchHistoryRef = firestore.collection('history');
+    this.searchHistory = this.searchHistoryRef.valueChanges({
+      idField: 'propertyId',
+    });
     this.amazonProducts = this.amazonRef.valueChanges({
       idField: 'propertyId',
     });
@@ -248,4 +254,8 @@ export class FbService {
       this.checkStarredItems.unsubscribe();
     });
   }
+
+  /*-------------------------------------------
+              Save search history
+  ---------------------------------------------- */
 }

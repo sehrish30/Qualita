@@ -1,3 +1,7 @@
 .background {
   --background: #a9a4c7 url('../../assets/history.png');
 }
+.my-custom-class .alert-wrapper {
+  --background: #a9a4c7;
+  background: #a9a4c7;
+}

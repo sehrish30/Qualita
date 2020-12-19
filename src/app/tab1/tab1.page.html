@@ -2,13 +2,14 @@
 <ion-header [translucent]="true" class="toolbar">
   <ion-toolbar class="toolbar">
     <ion-buttons collapse="true" slot="end">
-      <!-- <ion-icon
+      <ion-icon
         class="icon"
         name="filter-outline"
         collapse="true"
         slot="end"
         size="large"
-      ></ion-icon> -->
+        (click)="filterMostLiked()"
+      ></ion-icon>
       <ion-icon class="icon" name="add" slot="end" size="large"></ion-icon>
     </ion-buttons>
     <ion-title> Home </ion-title>

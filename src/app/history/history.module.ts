@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NgPipesModule } from 'ngx-pipes';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,8 +14,9 @@ import { HistoryPage } from './history.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    HistoryPageRoutingModule
+    NgPipesModule,
+    HistoryPageRoutingModule,
   ],
-  declarations: [HistoryPage]
+  declarations: [HistoryPage],
 })
 export class HistoryPageModule {}

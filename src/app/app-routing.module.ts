@@ -41,13 +41,13 @@ const routes: Routes = [
         (m) => m.ProductDetailPageModule
       ),
   },
-  {
-    path: 'comment-modal/:productId',
-    loadChildren: () =>
-      import('./comment-modal/comment-modal.module').then(
-        (m) => m.CommentModalPageModule
-      ),
-  },
+  // {
+  //   path: 'comment-modal/:productId',
+  //   loadChildren: () =>
+  //     import('./comment-modal/comment-modal.module').then(
+  //       (m) => m.CommentModalPageModule
+  //     ),
+  // },
   {
     path: 'edit-comment',
     loadChildren: () =>
@@ -59,6 +59,10 @@ const routes: Routes = [
     path: 'history',
     loadChildren: () =>
       import('./history/history.module').then((m) => m.HistoryPageModule),
+  },
+  {
+    path: 'trending',
+    loadChildren: () => import('./trending/trending.module').then( m => m.TrendingPageModule)
   },
 ];
 @NgModule({
