@@ -1,0 +1,50 @@
+<script src="dynamics.js"></script>
+<ion-header [translucent]="true" class="toolbar">
+  <ion-toolbar color="secondary" class="toolbar">
+    <ion-buttons collapse="true" slot="end">
+      <ion-icon class="icon" name="trash" slot="end" size="large"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title> History </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background">
+  <div padding>
+    <ion-segment [(ngModel)]="showSegment" color="medium">
+      <ion-segment-button value="search">
+        <ion-label class="label">Search</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="report">
+        <ion-label class="label">Reports</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="showSegment">
+    <div *ngSwitchCase="'search'">
+      <ion-list>
+        <ion-item-sliding>
+          <ion-item>
+            <ion-label>Item</ion-label>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option (click)="unread(item)">Unread</ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+
+        <ion-item-sliding>
+          <ion-item>
+            <ion-label>Item</ion-label>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option (click)="unread(item)">Unread</ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
+    <div *ngSwitchCase="'report'">Habiba work here</div>
+  </div>
+</ion-content>

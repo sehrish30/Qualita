@@ -60,7 +60,7 @@ export class FbService {
       } else {
         console.log('USER');
         this.currentUser = null;
-        this.navCtrl.navigateRoot('/signin');
+        // this.navCtrl.navigateRoot('/signin');
         authObserver.unsubscribe();
       }
     });
@@ -183,14 +183,14 @@ export class FbService {
   }
 
   /*-------------------------------------------
-    Get Starred Items tarred Items from local storage
+    Get Starred Items starred Items from local storage
   ---------------------------------------------- */
   async getStarredItems() {
+    console.log('Now');
     try {
       const data = await this.storage.get('id');
       if (data) {
         this.starredItems = data;
-        console.log('I collect it here', this.starredItems);
       }
     } catch (err) {
       console.error(err);

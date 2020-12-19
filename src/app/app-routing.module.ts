@@ -55,6 +55,11 @@ const routes: Routes = [
         (m) => m.EditCommentPageModule
       ),
   },
+  {
+    path: 'history',
+    loadChildren: () =>
+      import('./history/history.module').then((m) => m.HistoryPageModule),
+  },
 ];
 @NgModule({
   imports: [

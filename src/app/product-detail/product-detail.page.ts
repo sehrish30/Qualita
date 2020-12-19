@@ -23,9 +23,9 @@ export class ProductDetailPage implements OnInit {
     public activatedrouter: ActivatedRoute,
     public FBSrv: FbService,
     public modalController: ModalController,
-    public navCtrl: NavController,
-    private reversePipe: ReversePipe
+    public navCtrl: NavController
   ) {
+    this.FBSrv.getStarredItems();
     /*------------------------------------
       Get id from route
     -------------------------------------- */

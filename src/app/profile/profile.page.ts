@@ -15,7 +15,7 @@ export class ProfilePage implements OnInit {
     public afAuth: AngularFireAuth,
     public navCtrl: NavController
   ) {
-    if (!this.fbSrv.currentUser) {
+    if (!this.fbSrv.currentUser?.uid) {
       this.navCtrl.navigateForward('signin');
     }
   }

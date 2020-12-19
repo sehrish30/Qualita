@@ -48,7 +48,7 @@
     <ion-row>
       <ion-col>
         <ion-button
-          (click)="signUp(user.name, user.email, user.password)"
+          (click)="animatePic(user.name, user.email, user.password)"
           expand="block"
           color="warning"
           class="signup-button"
@@ -66,6 +66,7 @@
     </ion-row>
   </ion-grid>
   <img
+    id="logo"
     class="signup-image"
     alt="style with effect"
     src="../../assets/smoke.png"

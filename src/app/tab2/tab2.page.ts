@@ -3,6 +3,8 @@ import { FbService } from './../fb.service';
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 
+declare var dynamics: any;
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -19,9 +21,29 @@ export class Tab2Page {
     FBSrv.getStarredItems();
     FBSrv.getStarredProducts();
     console.log(FBSrv.starredItems);
-    if (FBSrv.starredItems.length > 0) {
-      this.showNotFound = false;
-    }
+  }
+
+  animateCard(itemID, product) {
+    console.log('Came');
+    const el = document.getElementById('stars');
+    dynamics.animate(
+      el,
+      {
+        translateX: 400,
+        scale: 1,
+        opacity: 0.5,
+      },
+      {
+        type: dynamics.spring,
+        frequency: 200,
+        friction: 200,
+        duration: 2000,
+        complete: () => {
+          // stop animation
+          this.FBSrv.addFavToLocalStorage(itemID, product);
+        },
+      }
+    );
   }
 
   deleteAllStarred() {

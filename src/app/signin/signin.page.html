@@ -1,7 +1,6 @@
 <ion-header>
   <ion-toolbar class="toolbar" color="secondary">
     <ion-buttons>
-      <ion-back-button defaultHref="/"></ion-back-button>
       <ion-title> Signin </ion-title>
     </ion-buttons>
   </ion-toolbar>
@@ -37,7 +36,7 @@
     <ion-row>
       <ion-col>
         <ion-button
-          (click)="signIn(user.email, user.password)"
+          (click)="animatePic(user.email, user.password)"
           expand="block"
           color="warning"
           class="signin-button"
@@ -47,14 +46,33 @@
       </ion-col>
     </ion-row>
     <ion-row>
+      <ion-col>
+        <ion-button
+          routerLink="/tabs/tab1"
+          expand="block"
+          fill="outline"
+          color="warning"
+          class="signin-button"
+          disabled="{{stop}}"
+          >Explore</ion-button
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col class="ion-text-center">
         <ion-router-link color="warning" routerLink="/forgot">
           Forgot password?
         </ion-router-link>
       </ion-col>
+      <ion-col class="ion-text-center">
+        <ion-router-link color="warning" routerLink="/signup">
+          Sign up?
+        </ion-router-link>
+      </ion-col>
     </ion-row>
   </ion-grid>
   <img
+    id="logo"
     class="signin-image"
     alt="style with effect"
     src="../../assets/smoke.png"

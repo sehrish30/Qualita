@@ -5,6 +5,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { LoadingController } from '@ionic/angular';
 
 import { Router } from '@angular/router';
+declare var dynamics: any;
 
 @Component({
   selector: 'app-signup',
@@ -23,6 +24,27 @@ export class SignupPage implements OnInit {
   public user: User = {} as User;
   // public user: {name:'', password: ''}
   ngOnInit() {}
+
+  animatePic(name, email, password) {
+    const el = document.getElementById('logo');
+    dynamics.animate(
+      el,
+      {
+        translateY: 100,
+        scale: 1.5,
+        opacity: 0.5,
+      },
+      {
+        type: dynamics.spring,
+        frequency: 200,
+        friction: 200,
+        duration: 1500,
+        complete: () => {
+          this.signUp(name, email, password);
+        },
+      }
+    );
+  }
 
   async presentLoading() {
     const loading = await this.loadingController.create({

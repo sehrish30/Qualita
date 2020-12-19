@@ -54,10 +54,13 @@ export class Tab3Page {
     this.handleTypeChanges(evt);
   }
 
+  saveSearchesToFirebase() {}
+
   handleChange(evt) {
     if (evt.key === 'Enter') {
       this.filter = evt.target.value;
       this.getProducts();
+      this.saveSearchesToFirebase();
     }
   }
 

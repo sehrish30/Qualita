@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from '@ionic/angular';
 
+declare var dynamics: any;
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',

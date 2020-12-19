@@ -1,13 +1,14 @@
+<script src="dynamics.js"></script>
 <ion-header [translucent]="true" class="toolbar">
   <ion-toolbar class="toolbar">
     <ion-buttons collapse="true" slot="end">
-      <ion-icon
+      <!-- <ion-icon
         class="icon"
         name="filter-outline"
         collapse="true"
         slot="end"
         size="large"
-      ></ion-icon>
+      ></ion-icon> -->
       <ion-icon class="icon" name="add" slot="end" size="large"></ion-icon>
     </ion-buttons>
     <ion-title> Home </ion-title>
@@ -45,6 +46,7 @@
   <div [ngSwitch]="showSegment">
     <div *ngSwitchCase="'amazon'">
       <ion-card
+        id="amazon"
         class="product"
         *ngFor="let product of FBSrv.amazonProducts | async; let i=index"
         routerLink="/product-detail/{{product.propertyId}}"

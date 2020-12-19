@@ -4,6 +4,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { LoadingController } from '@ionic/angular';
 import { FbService, User } from './../fb.service';
 
+declare var dynamics: any;
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.page.html',
@@ -20,6 +22,27 @@ export class SigninPage implements OnInit {
   ) {}
   public user: User = {} as User;
   ngOnInit() {}
+
+  animatePic(email, password) {
+    const el = document.getElementById('logo');
+    dynamics.animate(
+      el,
+      {
+        translateY: 100,
+        scale: 1.5,
+        opacity: 0.5,
+      },
+      {
+        type: dynamics.spring,
+        frequency: 200,
+        friction: 200,
+        duration: 1500,
+        complete: () => {
+          this.signIn(email, password);
+        },
+      }
+    );
+  }
 
   async presentToast(msg) {
     const toast = await this.toastController.create({

@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="toolbar">
-    <ion-buttons (click)="deleteAllStarred()" collapse="true" slot="end">
+    <ion-buttons (click)="presentAlertConfirm()" collapse="true" slot="end">
       <ion-icon slot="end" size="large" name="trash-outline"></ion-icon>
     </ion-buttons>
     <ion-title> Favorites </ion-title>
@@ -23,6 +23,7 @@
   </ion-header>
 
   <ion-card
+    id="stars"
     class="product"
     *ngFor="let product of FBSrv.starredProducts ; let i=index"
     routerLink="/product-detail/{{product.itemID}}"
@@ -39,7 +40,7 @@
         class="icon-fav"
         [name]="FBSrv.starredItems.includes(product.itemID)? 'heart': 'heart-outline'"
         size="large"
-        (click)="FBSrv.addFavToLocalStorage(product.itemID, product)"
+        (click)="animateCard(product.itemID, product)"
       ></ion-icon>
     </ion-card-header>
 
