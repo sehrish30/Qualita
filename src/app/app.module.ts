@@ -3,6 +3,7 @@ import { CommentModalPageRoutingModule } from './comment-modal/comment-modal-rou
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { NgPipesModule } from 'ngx-pipes';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -45,6 +46,7 @@ const firebaseConfig = {
     AppRoutingModule,
     CommentModalPageRoutingModule,
     EditCommentPageModule,
+    NgPipesModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth

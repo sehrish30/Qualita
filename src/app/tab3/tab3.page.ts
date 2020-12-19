@@ -1,12 +1,14 @@
 import { NavController } from '@ionic/angular';
 import { FbService } from './../fb.service';
 import { Component } from '@angular/core';
-import { stringify } from '@angular/compiler/src/util';
+import { ReversePipe } from 'ngx-pipes';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss'],
+  providers: [ReversePipe],
 })
 export class Tab3Page {
   public filter;
@@ -21,7 +23,19 @@ export class Tab3Page {
   public performance = 1;
 
   // For Filtering
-  constructor(public FBSrv: FbService, public navCtrl: NavController) {}
+  constructor(
+    public FBSrv: FbService,
+    public navCtrl: NavController,
+    private reversePipe: ReversePipe,
+    private storage: Storage
+  ) {
+    this.storage.get('rating').then((value) => {
+      this.ratingFilter = value;
+    });
+    this.storage.get('price').then((value) => {
+      this.priceFilter = value;
+    });
+  }
   handleTypeChanges(evt) {
     // this evt is the value passed of ngModel
     if (this.performance > 1) {
@@ -33,6 +47,13 @@ export class Tab3Page {
       this.matchedProducts = [];
     }
   }
+
+  saveFilterOptionsToLocalStorage(evt) {
+    this.storage.set('rating', this.ratingFilter);
+    this.storage.set('price', this.priceFilter);
+    this.handleTypeChanges(evt);
+  }
+
   handleChange(evt) {
     if (evt.key === 'Enter') {
       this.filter = evt.target.value;
@@ -70,33 +91,8 @@ export class Tab3Page {
       this.performance += 1;
     }
   }
-  /*-----------------------------------------
-                 Formating
-    -----------------------------------------*/
 
-  format(first, second) {
-    if (first.price.length >= 4) {
-      first.price = first.price.replace(',', '');
-      first.price = first.price.replace('-', '');
-    }
-    if (second.price.length >= 4) {
-      second.price = second.price.replace(',', '');
-    }
-    for (let i = 0; i < first.price.length; i++) {
-      if (first.price.charAt(i) === '.') {
-        const n = first.price.indexOf('.');
-        first.price = first.price.slice(1, n);
-      }
-    }
-    for (let i = 0; i < second.price.length; i++) {
-      if (second.price.charAt(i) === '.') {
-        const n = second.price.indexOf('.');
-        second.price = second.price.slice(1, n);
-      }
-    }
-  }
-
-  formatPrice(first, second) {
+  formatRate(first, second) {
     first.rating = first.rating.slice(0, 3);
     second.rating = second.rating.slice(0, 3);
   }
@@ -106,8 +102,6 @@ export class Tab3Page {
     -----------------------------------------*/
 
   compareHigh = (first, second) => {
-    this.format(first, second);
-
     if (Number(first.price) < Number(second.price)) {
       return 1;
     }
@@ -118,7 +112,6 @@ export class Tab3Page {
   };
 
   compareLow = (first, second) => {
-    this.format(first, second);
     if (first.length > 1) {
       first = first.replace('', ',');
     }
@@ -138,7 +131,7 @@ export class Tab3Page {
 
   compareHighRate = (first, second) => {
     if (first.rating.length > 3 || second.rating.length > 3) {
-      this.formatPrice(first, second);
+      this.formatRate(first, second);
     }
 
     if (Number(first.rating) < Number(second.rating)) {
@@ -149,6 +142,10 @@ export class Tab3Page {
     }
   };
   compareLowRate = (first, second) => {
+    if (first.rating.length > 3 || second.rating.length > 3) {
+      this.formatRate(first, second);
+    }
+
     if (Number(first.rating) > Number(second.rating)) {
       return 1;
     }
@@ -162,10 +159,13 @@ export class Tab3Page {
     -----------------------------------------*/
 
   compareHighPriceAndHighRating(first, second) {
-    if (first.rating.length > 3 || second.rating.length > 3) {
-      this.formatPrice(first, second);
+    if (first.rating.length > 3) {
+      first.rating = first.rating.slice(0, 3);
     }
-    this.format(first, second);
+    if (second.rating.length > 3) {
+      second.rating = second.rating.slice(0, 3);
+    }
+
     if (
       Number(first.price) < Number(second.price) &&
       Number(first.rating) < Number(second.rating)
@@ -186,10 +186,13 @@ export class Tab3Page {
     -----------------------------------------*/
 
   compareLowPriceAndLowRating(first, second) {
-    if (first.rating.length > 3 || second.rating.length > 3) {
-      this.formatPrice(first, second);
+    if (first.rating.length > 3) {
+      first.rating = first.rating.slice(0, 3);
     }
-    this.format(first, second);
+    if (second.rating.length > 3) {
+      second.rating = second.rating.slice(0, 3);
+    }
+
     if (
       Number(first.price) > Number(second.price) &&
       Number(first.rating) > Number(second.rating)
@@ -209,10 +212,13 @@ export class Tab3Page {
         Filtering Low Price and High Rate
     -----------------------------------------*/
   compareLowPriceAndHighRating(first, second) {
-    if (first.rating.length > 3 || second.rating.length > 3) {
-      this.formatPrice(first, second);
+    if (first.rating.length > 3) {
+      first.rating = first.rating.slice(0, 3);
     }
-    this.format(first, second);
+    if (second.rating.length > 3) {
+      second.rating = second.rating.slice(0, 3);
+    }
+
     if (
       Number(first.price) > Number(second.price) &&
       Number(first.rating) < Number(second.rating)
@@ -233,10 +239,13 @@ export class Tab3Page {
     -----------------------------------------*/
 
   compareHighPriceAndLowRating(first, second) {
-    if (first.rating.length > 3 || second.rating.length > 3) {
-      this.formatPrice(first, second);
+    if (first.rating.length > 3) {
+      first.rating = first.rating.slice(0, 3);
     }
-    this.format(first, second);
+    if (second.rating.length > 3) {
+      second.rating = second.rating.slice(0, 3);
+    }
+
     if (
       Number(first.price) < Number(second.price) &&
       Number(first.rating) > Number(second.rating)
@@ -271,6 +280,7 @@ export class Tab3Page {
         product.badge?.toLowerCase().includes(query)
       );
     });
+
     this.matchedProducts.push(...alibabaProducts);
 
     if (this.priceFilter === 'high' && this.ratingFilter === 'high') {

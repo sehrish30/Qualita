@@ -3,6 +3,7 @@
     <ion-buttons collapse="true" slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
+
     <ion-title> {{FBSrv.product.title?.slice(0,10)}}...</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -70,13 +71,18 @@
       >{{FBSrv.product.comments?.length || "No"}}{{" "}}Comments</ion-label
     >
   </ion-list-header>
+
   <ion-item color="warning" *ngFor="let comment of FBSrv.product.comments">
     <ion-avatar slot="start">
       <img src="./avatar-rey.png" />
     </ion-avatar>
     <ion-label>
-      <h5>{{comment.postedBy.name}}</h5>
-      <h3>{{comment.text}}</h3>
+      <h5>
+        {{comment.postedBy.name}}<span
+          >{{" "}}|{{" "}}{{comment.created | timeAgo}}</span
+        ><ion-icon name="time-outline" class="icon-vertical"></ion-icon>
+      </h5>
+      <h2><strong>{{comment.text}}</strong></h2>
     </ion-label>
     <ion-fab-button
       *ngIf="this.FBSrv.currentUser.uid === comment.postedBy.id"

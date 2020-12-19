@@ -34,12 +34,14 @@ export class EditCommentPage implements OnInit {
                 id: this.FBSrv.currentUser.uid,
                 name: this.FBSrv.currentUser.displayName,
               },
-              created: Date.now(),
+              created: new Date(),
               text: this.commentText,
             };
             // check the existence of our comment amd replace with with new comment else keep old one
             const updatedComments = previousComments.map((item) =>
-              item.created === this.commentCreated ? newComment : item
+              item.created.seconds === this.commentCreated.seconds
+                ? newComment
+                : item
             );
 
             if (previousComments?.length > 0) {
@@ -62,12 +64,14 @@ export class EditCommentPage implements OnInit {
                 id: this.FBSrv.currentUser.uid,
                 name: this.FBSrv.currentUser.displayName,
               },
-              created: Date.now(),
+              created: new Date(),
               text: this.commentText,
             };
             // check the existence of our comment
             const updatedComments = previousComments.map((item) =>
-              item.created === this.commentCreated ? newComment : item
+              item.created.seconds === this.commentCreated.seconds
+                ? newComment
+                : item
             );
             if (previousComments?.length > 0) {
               this.FBSrv.amazonRef

@@ -28,7 +28,7 @@
         <ion-label>Price</ion-label>
         <ion-select
           [(ngModel)]="priceFilter"
-          (ngModelChange)="handleTypeChanges($event)"
+          (ngModelChange)="saveFilterOptionsToLocalStorage($event)"
         >
           <ion-select-option value="high"
             >4.0 and Up<ion-icon class="star" name="star"></ion-icon
@@ -42,7 +42,7 @@
         <ion-label>Rating</ion-label>
         <ion-select
           [(ngModel)]="ratingFilter"
-          (ngModelChange)="handleTypeChanges($event)"
+          (ngModelChange)="saveFilterOptionsToLocalStorage($event)"
         >
           <ion-select-option value="high">High</ion-select-option>
           <ion-select-option value="low">Low</ion-select-option>

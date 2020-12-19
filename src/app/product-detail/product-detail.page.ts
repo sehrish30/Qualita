@@ -5,22 +5,26 @@ import { FbService } from './../fb.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController, NavController } from '@ionic/angular';
+import { ReversePipe } from 'ngx-pipes';
 
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.page.html',
   styleUrls: ['./product-detail.page.scss'],
+  providers: [ReversePipe],
 })
 export class ProductDetailPage implements OnInit {
   public index;
 
   public product: {} = {} as any;
+
   constructor(
     public firestore: AngularFirestore,
     public activatedrouter: ActivatedRoute,
     public FBSrv: FbService,
     public modalController: ModalController,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    private reversePipe: ReversePipe
   ) {
     /*------------------------------------
       Get id from route
@@ -68,7 +72,7 @@ export class ProductDetailPage implements OnInit {
         if (doc.exists) {
           const previousComments = doc.data().comments;
           const updatedComments = previousComments.filter(
-            (item) => item.created !== commentCreatedDate
+            (item) => item.created.seconds !== commentCreatedDate.seconds
           );
           this.FBSrv.amazonRef
             .doc(productId)
@@ -85,7 +89,7 @@ export class ProductDetailPage implements OnInit {
         if (doc.exists) {
           const previousComments = doc.data().comments;
           const updatedComments = previousComments.filter(
-            (item) => item.created !== commentCreatedDate
+            (item) => item.created.seconds !== commentCreatedDate.seconds
           );
           this.FBSrv.alibabaRef
             .doc(productId)

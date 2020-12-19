@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NgPipesModule } from 'ngx-pipes';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,8 +14,9 @@ import { ProductDetailPage } from './product-detail.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ProductDetailPageRoutingModule
+    NgPipesModule,
+    ProductDetailPageRoutingModule,
   ],
-  declarations: [ProductDetailPage]
+  declarations: [ProductDetailPage],
 })
 export class ProductDetailPageModule {}

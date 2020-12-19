@@ -42,7 +42,7 @@ export class CommentModalPage implements OnInit {
                 id: this.FBSrv.currentUser.uid,
                 name: this.FBSrv.currentUser.displayName,
               },
-              created: Date.now(),
+              created: new Date(),
               text: this.commentText,
             };
             if (previousComments?.length > 0) {
@@ -75,7 +75,7 @@ export class CommentModalPage implements OnInit {
                 name: this.FBSrv.currentUser.displayName,
                 // photo: this.FBSrv.currentUser.photoUrl ||
               },
-              created: Date.now(),
+              created: new Date(),
               text: this.commentText,
             };
             if (previousComments?.length > 0) {

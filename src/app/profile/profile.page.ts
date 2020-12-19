@@ -14,7 +14,11 @@ export class ProfilePage implements OnInit {
     public fbSrv: FbService,
     public afAuth: AngularFireAuth,
     public navCtrl: NavController
-  ) {}
+  ) {
+    if (!this.fbSrv.currentUser) {
+      this.navCtrl.navigateForward('signin');
+    }
+  }
 
   ngOnInit() {}
 
