@@ -22,10 +22,10 @@
     <ion-card-content class="ion-no-padding">
       <ion-row>
         <ion-col>
-          {{FBSrv.product.rating}}<ion-icon
-            name="star"
-            class="product-star"
-          ></ion-icon>
+          <ion-text class="ion-padding-start" color="warning"
+            >{{FBSrv.product?.rating?.slice(0, 3)}}
+            <ion-icon name="star" class="product-star"></ion-icon>
+          </ion-text>
         </ion-col>
         <ion-col>
           <ion-text color="warning" class="product-bold"

@@ -1,9 +1,80 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>trending</ion-title>
+  <ion-toolbar class="toolbar" color="secondary">
+    <ion-title> Trending </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="background">
+  <ion-header [fullscreen]="true" collapse="condense">
+    <ion-toolbar class="toolbar" color="secondary"> </ion-toolbar>
+  </ion-header>
 
+  <ion-card
+    id="amazon"
+    class="product"
+    *ngFor="let product of allProducts | async; let i=index"
+    routerLink="/product-detail/{{product.id}}"
+  >
+    <ion-card-header class="product-header">
+      <ion-card-subtitle class="product-header-image"
+        ><img src="{{product.image}}" alt="product scraped from amazon"
+      /></ion-card-subtitle>
+      <ion-card-title color="danger" class="product-title"
+        >{{product.title.slice(0,40)}}...</ion-card-title
+      >
+
+      <ion-icon
+        class="icon-fav"
+        [name]="FBSrv.starredItems.includes(product.itemID)? 'heart': 'heart-outline'"
+        size="large"
+        (click)="FBSrv.addFavToLocalStorage(product.itemID, product)"
+      ></ion-icon>
+    </ion-card-header>
+
+    <ion-card-content color="danger" class="ion-text-center product-body">
+      <span class="white-color" color="danger"
+        >{{product.rating.slice(0, 3)}}</span
+      >
+      <ion-icon name="star" class="star"></ion-icon>
+      <span color="danger">{{product.price}}</span>$
+      <ion-badge color="danger" style="vertical-align: middle"
+        >{{product.type}}</ion-badge
+      >
+    </ion-card-content>
+  </ion-card>
+
+  <!--Alibaba Products-->
+  <ion-card
+    id="amazon"
+    class="product"
+    *ngFor="let product of alibabaProducts | async; let i=index"
+    routerLink="/product-detail/{{product.id}}"
+  >
+    <ion-card-header class="product-header">
+      <ion-card-subtitle class="product-header-image"
+        ><img src="{{product.image}}" alt="product scraped from amazon"
+      /></ion-card-subtitle>
+      <ion-card-title color="danger" class="product-title"
+        >{{product.title.slice(0,40)}}...</ion-card-title
+      >
+
+      <ion-icon
+        class="icon-fav"
+        [name]="FBSrv.starredItems.includes(product.itemID)? 'heart': 'heart-outline'"
+        size="large"
+        (click)="FBSrv.addFavToLocalStorage(product.itemID, product)"
+      ></ion-icon>
+    </ion-card-header>
+
+    <ion-card-content color="danger" class="ion-text-center product-body">
+      <span class="white-color" color="danger"
+        >{{product.rating.slice(0, 3)}}</span
+      >
+      <ion-icon name="star" class="star"></ion-icon>
+      <span color="danger">{{product.price}}</span>$
+      <ion-badge color="danger" style="vertical-align: middle"
+        >{{product.type}}</ion-badge
+      >
+    </ion-card-content>
+  </ion-card>
 </ion-content>

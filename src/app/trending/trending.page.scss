@@ -1,0 +1,67 @@
+.background {
+  --background: #6e6db1 url('../../assets/thunder.png');
+}
+
+.toolbar {
+  --background: #3c3a4c;
+  color: #d8cea3;
+}
+
+.icon {
+  margin: 5px;
+}
+
+.content {
+  background-color: #3c3a4c;
+  --background: #a9a4c7;
+}
+
+div {
+  height: fit-content(20em);
+}
+
+.icon-fav {
+  padding-left: 2px;
+  order: 3;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+
+  &-title {
+    font-size: 1.3rem;
+    padding-left: 10px;
+    order: 2;
+    flex-grow: 2;
+    width: 5rem;
+    word-wrap: normal;
+  }
+  &-header {
+    display: flex;
+
+    &-image {
+      height: 5rem;
+      width: 5rem;
+      object-fit: cover;
+    }
+  }
+  &-body {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #a9a4c7;
+  }
+}
+
+.star {
+  color: #fdb827;
+}
+span {
+  padding-left: 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.label {
+  font-size: 1rem;
+}

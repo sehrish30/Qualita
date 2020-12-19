@@ -17,6 +17,7 @@ export class ProductDetailPage implements OnInit {
   public index;
 
   public product: {} = {} as any;
+  public go = false;
 
   constructor(
     public firestore: AngularFirestore,
@@ -145,17 +146,22 @@ export class ProductDetailPage implements OnInit {
             };
 
             if (previousVotes) {
-              product.votes.map((vote) => {
-                if (vote.votedBy.id !== this.FBSrv.currentUser.uid) {
-                  const updatedVotes = [...previousVotes, vote];
-                  const voteCount = updatedVotes.length;
-                  this.FBSrv.amazonRef
-                    .doc(prodId)
-                    .update({ votes: updatedVotes, voteCount });
-                  this.FBSrv.product.voteCount = voteCount;
-                }
-              });
+              // checking if the user has not already voted
+              const checkVote = (vote) => {
+                return vote.votedBy.id !== this.FBSrv.currentUser.uid;
+              };
+              this.go = product.votes.every(checkVote);
+
+              if (this.go) {
+                const updatedVotes = [...previousVotes, vote];
+                const voteCount = updatedVotes.length;
+                this.FBSrv.amazonRef
+                  .doc(prodId)
+                  .update({ votes: updatedVotes, voteCount });
+                this.FBSrv.product.voteCount = voteCount;
+              }
             } else {
+              debugger;
               const updatedVotes = [vote];
               const voteCount = updatedVotes.length;
               this.FBSrv.amazonRef
@@ -181,16 +187,20 @@ export class ProductDetailPage implements OnInit {
             };
 
             if (previousVotes) {
-              product.votes.map((vote) => {
-                if (vote.votedBy.id !== this.FBSrv.currentUser.uid) {
-                  const updatedVotes = [...previousVotes, vote];
-                  const voteCount = updatedVotes.length;
-                  this.FBSrv.alibabaRef
-                    .doc(prodId)
-                    .update({ votes: updatedVotes, voteCount });
-                  this.FBSrv.product.voteCount = voteCount;
-                }
-              });
+              // checking if the user has not already voted
+              const checkVote = (vote) => {
+                return vote.votedBy.id !== this.FBSrv.currentUser.uid;
+              };
+              this.go = product.votes.every(checkVote);
+
+              if (this.go) {
+                const updatedVotes = [...previousVotes, vote];
+                const voteCount = updatedVotes.length;
+                this.FBSrv.amazonRef
+                  .doc(prodId)
+                  .update({ votes: updatedVotes, voteCount });
+                this.FBSrv.product.voteCount = voteCount;
+              }
             } else {
               const updatedVotes = [vote];
               const voteCount = updatedVotes.length;
