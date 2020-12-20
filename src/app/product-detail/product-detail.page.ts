@@ -18,6 +18,7 @@ export class ProductDetailPage implements OnInit {
 
   public product: {} = {} as any;
   public go = false;
+  public showSegrment = 'amazon';
 
   constructor(
     public firestore: AngularFirestore,
@@ -40,7 +41,7 @@ export class ProductDetailPage implements OnInit {
       .ref.get()
       .then((doc) => {
         if (doc.exists) {
-          this.product = { ...doc.data(), id: doc.id };
+          this.product = { ...doc.data(), id: doc.id, type: 'amazon' };
           FBSrv.product = this.product;
         } else {
           FBSrv.alibabaRef
@@ -48,7 +49,11 @@ export class ProductDetailPage implements OnInit {
             .ref.get()
             .then((alibabadoc) => {
               if (alibabadoc.exists) {
-                this.product = { ...alibabadoc.data(), id: alibabadoc.id };
+                this.product = {
+                  ...alibabadoc.data(),
+                  id: alibabadoc.id,
+                  type: 'alibaba',
+                };
                 FBSrv.product = this.product;
               }
             })

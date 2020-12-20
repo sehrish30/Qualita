@@ -62,7 +62,8 @@ const routes: Routes = [
   },
   {
     path: 'trending',
-    loadChildren: () => import('./trending/trending.module').then( m => m.TrendingPageModule)
+    loadChildren: () =>
+      import('./trending/trending.module').then((m) => m.TrendingPageModule),
   },
 ];
 @NgModule({

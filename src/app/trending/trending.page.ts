@@ -19,6 +19,7 @@ export class TrendingPage implements OnInit {
   public alibabaProducts: Observable<any[]>;
   public amazonCollection: AngularFirestoreCollection;
   public alibabaCollection: AngularFirestoreCollection;
+  public showSegment = 'amazon';
   constructor(public FBSrv: FbService, public afs: AngularFirestore) {
     this.amazonCollection = afs.collection('amazon', (ref) =>
       ref.orderBy('voteCount', 'desc')
