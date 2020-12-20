@@ -83,7 +83,7 @@ export class FbService {
     this.alibabaProducts = this.alibabaRef.valueChanges({
       idField: 'propertyId',
     });
-
+    this.getStarredProducts();
     // amazonProducts: Observable<any>
     // this.amazonProducts = this.firestore.collection('alibaba').valueChanges()
   }
@@ -229,11 +229,14 @@ export class FbService {
     Get Fav Products from firebase
   ---------------------------------------------- */
   getStarredProducts() {
-    this.starredProducts = [];
+    this.getStarredItems();
     this.checkStarredItems = this.amazonProducts.subscribe((collection) => {
+      this.starredProducts = [];
+      console.log(this.starredItems);
       for (const doc of collection) {
         for (const stars of this.starredItems) {
           if (Number(doc.itemID) === Number(stars)) {
+            console.log(doc.itemID, stars);
             this.starredProducts.push(doc);
             break;
           }
@@ -241,16 +244,18 @@ export class FbService {
       }
       this.checkStarredItems.unsubscribe();
     });
-
     this.checkStarredItems = this.alibabaProducts.subscribe((collection) => {
+      console.log(this.starredItems);
       for (const doc of collection) {
         for (const stars of this.starredItems) {
           if (Number(doc.itemID) === Number(stars)) {
+            console.log(doc.itemID, stars);
             this.starredProducts.push(doc);
             break;
           }
         }
       }
+      console.log(this.starredProducts);
       this.checkStarredItems.unsubscribe();
     });
   }

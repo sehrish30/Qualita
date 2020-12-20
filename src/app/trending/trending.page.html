@@ -1,14 +1,15 @@
-<ion-header>
-  <ion-toolbar class="toolbar" color="secondary">
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar">
     <ion-title> Trending </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="background">
-  <ion-header [fullscreen]="true" collapse="condense">
-    <ion-toolbar class="toolbar" color="secondary"> </ion-toolbar>
+<ion-content [fullscreen]="true" class="background">
+  <ion-header collapse="condense">
+    <ion-toolbar class="toolbar">
+      <ion-title size="large">Trending</ion-title>
+    </ion-toolbar>
   </ion-header>
-
   <div padding>
     <ion-segment [(ngModel)]="showSegment" color="medium">
       <ion-segment-button value="amazon">

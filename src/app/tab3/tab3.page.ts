@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { FbService } from './../fb.service';
 import { Component } from '@angular/core';
@@ -27,8 +28,10 @@ export class Tab3Page {
     public FBSrv: FbService,
     public navCtrl: NavController,
     private reversePipe: ReversePipe,
-    private storage: Storage
+    private storage: Storage,
+    public activatedrouter: ActivatedRoute
   ) {
+    this.filter = this.activatedrouter.snapshot.paramMap.get('searchTerm');
     this.storage.get('rating').then((value) => {
       this.ratingFilter = value;
     });

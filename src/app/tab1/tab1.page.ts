@@ -8,8 +8,6 @@ import { IonInfiniteScroll } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { LoadingController } from '@ionic/angular';
 
-declare var dynamics: any;
-
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -33,13 +31,11 @@ export class Tab1Page {
 
   loadData(event) {
     setTimeout(() => {
-      console.log('Done');
       event.target.complete();
 
       // App logic to determine if all data is loaded
       // and disable the infinite scroll
       const check = this.FBSrv.amazonProducts.subscribe((data) => {
-        console.log(data);
         if (data.length === 100) {
           event.target.disabled = true;
         }

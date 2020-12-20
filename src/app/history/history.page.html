@@ -35,6 +35,7 @@
         class="ion-no-padding"
         color="primary"
         *ngFor="let search of userSearches; let i = index"
+        routerLink="/tabs/tab3/{{search.searchTerm}}"
       >
         <ion-item-sliding color="primary">
           <ion-item color="primary">

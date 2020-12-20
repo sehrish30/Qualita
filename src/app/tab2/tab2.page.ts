@@ -18,32 +18,9 @@ export class Tab2Page {
     public storage: Storage,
     public alertController: AlertController
   ) {
-    FBSrv.getStarredItems();
+    // FBSrv.getStarredItems();
     FBSrv.getStarredProducts();
     console.log(FBSrv.starredItems);
-  }
-
-  animateCard(itemID, product) {
-    console.log('Came');
-    const el = document.getElementById('stars');
-    dynamics.animate(
-      el,
-      {
-        translateX: 400,
-        scale: 1,
-        opacity: 0.5,
-      },
-      {
-        type: dynamics.spring,
-        frequency: 200,
-        friction: 200,
-        duration: 2000,
-        complete: () => {
-          // stop animation
-          this.FBSrv.addFavToLocalStorage(itemID, product);
-        },
-      }
-    );
   }
 
   deleteAllStarred() {
@@ -51,6 +28,30 @@ export class Tab2Page {
       console.log('Removed', data);
     });
     this.FBSrv.starredProducts = [];
+    this.FBSrv.starredItems = [];
+    this.animateCard();
+  }
+
+  animateCard() {
+    const el = document.getElementById('stars');
+    dynamics.animate(
+      el,
+      {
+        translateY: -100,
+        scale: 1,
+        opacity: 0.8,
+      },
+      {
+        type: dynamics.spring,
+        frequency: 200,
+        friction: 200,
+        duration: 2000,
+        // complete: () => {
+        //   // stop animation
+        //   this.deleteAllStarred();
+        // },
+      }
+    );
   }
 
   async presentAlertConfirm() {

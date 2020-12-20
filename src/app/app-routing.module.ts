@@ -41,13 +41,7 @@ const routes: Routes = [
         (m) => m.ProductDetailPageModule
       ),
   },
-  // {
-  //   path: 'comment-modal/:productId',
-  //   loadChildren: () =>
-  //     import('./comment-modal/comment-modal.module').then(
-  //       (m) => m.CommentModalPageModule
-  //     ),
-  // },
+
   {
     path: 'edit-comment',
     loadChildren: () =>

@@ -23,7 +23,6 @@
   </ion-header>
 
   <ion-card
-    id="stars"
     class="product"
     *ngFor="let product of FBSrv.starredProducts ; let i=index"
     routerLink="/product-detail/{{product.itemID}}"
@@ -35,13 +34,6 @@
       <ion-card-title color="tertiary" class="product-title"
         >{{product.title.slice(0,40)}}...</ion-card-title
       >
-
-      <ion-icon
-        class="icon-fav"
-        [name]="FBSrv.starredItems.includes(product.itemID)? 'heart': 'heart-outline'"
-        size="large"
-        (click)="animateCard(product.itemID, product)"
-      ></ion-icon>
     </ion-card-header>
 
     <ion-card-content color="tertiary" class="ion-text-center product-body">
@@ -51,6 +43,7 @@
     </ion-card-content>
   </ion-card>
   <ion-img
+    id="stars"
     src="../../assets/icon/Stargazing.svg"
     alt="No Starred item found"
   ></ion-img>
