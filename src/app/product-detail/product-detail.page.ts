@@ -71,6 +71,7 @@ export class ProductDetailPage implements OnInit {
        Delete comments
     -------------------------------------- */
   handleDeleteComment(productId, commentCreatedDate) {
+    debugger;
     this.FBSrv.amazonRef
       .doc(productId)
       .ref.get()
@@ -80,6 +81,7 @@ export class ProductDetailPage implements OnInit {
           const updatedComments = previousComments.filter(
             (item) => item.created.seconds !== commentCreatedDate.seconds
           );
+
           this.FBSrv.amazonRef
             .doc(productId)
             .update({ comments: updatedComments });

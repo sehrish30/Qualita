@@ -86,7 +86,7 @@
           >{{" "}}|{{" "}}{{comment.created | timeAgo}}</span
         ><ion-icon name="time-outline" class="icon-vertical"></ion-icon>
       </h5>
-      <h2><strong>{{comment.text}}</strong></h2>
+      <h2 class="ion-text-wrap"><strong>{{comment.text}}</strong></h2>
     </ion-label>
     <ion-fab-button
       *ngIf="this.FBSrv.currentUser.uid === comment.postedBy.id"

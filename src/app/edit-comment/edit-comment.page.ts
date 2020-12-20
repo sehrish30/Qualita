@@ -19,6 +19,10 @@ export class EditCommentPage implements OnInit {
 
   ngOnInit() {}
 
+  handleTyping(e) {
+    this.commentText = e.target.value;
+  }
+
   handleEditComment() {
     if (!this.FBSrv.currentUser) {
       this.navCtrl.navigateRoot('/signin');

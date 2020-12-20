@@ -18,5 +18,6 @@
     placeholder="Type Your comment here..."
     [(ngModel)]="commentText"
     (ngModelChange)="handleTyping($event)"
+    (ionChange)="handleTyping($event)"
   ></ion-textarea>
 </ion-content>

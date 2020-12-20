@@ -25,8 +25,7 @@ export class CommentModalPage implements OnInit {
   }
 
   handleTyping(e) {
-    this.commentText = e;
-    console.log(this.commentText);
+    this.commentText = e.target.value;
   }
 
   ngOnInit() {}
