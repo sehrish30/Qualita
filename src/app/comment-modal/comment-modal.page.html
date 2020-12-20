@@ -14,7 +14,9 @@
     class="ion-padding"
     rows="25"
     cols="25"
+    value="{{commentText}}"
     placeholder="Type Your comment here..."
     [(ngModel)]="commentText"
+    (ngModelChange)="handleTyping($event)"
   ></ion-textarea>
 </ion-content>

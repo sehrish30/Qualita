@@ -12,7 +12,7 @@ import { ModalController } from '@ionic/angular';
 export class CommentModalPage implements OnInit {
   public index;
   public action;
-  public commentText;
+  public commentText = '';
   public updatedComments = [];
 
   constructor(
@@ -22,6 +22,11 @@ export class CommentModalPage implements OnInit {
     public modalController: ModalController
   ) {
     this.index = this.activatedrouter.snapshot.paramMap.get('productId');
+  }
+
+  handleTyping(e) {
+    this.commentText = e;
+    console.log(this.commentText);
   }
 
   ngOnInit() {}
@@ -45,6 +50,7 @@ export class CommentModalPage implements OnInit {
               created: new Date(),
               text: this.commentText,
             };
+
             if (previousComments?.length > 0) {
               this.updatedComments = [...previousComments, newComment];
               this.FBSrv.product.comments = this.updatedComments;
