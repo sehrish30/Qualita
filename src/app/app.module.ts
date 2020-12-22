@@ -47,6 +47,7 @@ const firebaseConfig = {
     CommentModalPageRoutingModule,
     EditCommentPageModule,
     NgPipesModule,
+
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule, // firestore
     AngularFireAuthModule, // auth

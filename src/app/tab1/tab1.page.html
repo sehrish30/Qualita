@@ -3,14 +3,27 @@
   <ion-toolbar class="toolbar">
     <ion-buttons collapse="true" slot="end">
       <ion-icon
-        class="icon"
-        name="filter-outline"
-        collapse="true"
+        name="close-circle-outline"
+        slot="end"
+        *ngIf="show"
+        (click)="cancelSelection()"
+        size="large"
+      ></ion-icon>
+      <ion-icon
+        *ngIf="show"
+        name="reader-outline"
         slot="end"
         size="large"
-        (click)="filterMostLiked()"
+        (click)="geneateReport()"
       ></ion-icon>
-      <ion-icon class="icon" name="add" slot="end" size="large"></ion-icon>
+      <ion-icon
+        *ngIf="!show"
+        (click)="selectProducts()"
+        class="icon"
+        name="add"
+        slot="end"
+        size="large"
+      ></ion-icon>
     </ion-buttons>
     <ion-title> Home </ion-title>
   </ion-toolbar>
@@ -22,13 +35,27 @@
       <ion-title size="large">Home</ion-title>
       <ion-buttons collapse="true" slot="end">
         <ion-icon
+          name="close-circle-outline"
+          slot="end"
+          *ngIf="show"
+          (click)="cancelSelection()"
+          size="large"
+        ></ion-icon>
+        <ion-icon
+          *ngIf="show"
+          name="reader-outline"
+          slot="end"
+          size="large"
+          (click)="geneateReport()"
+        ></ion-icon>
+        <ion-icon
+          *ngIf="!show"
+          (click)="selectProducts()"
           class="icon"
-          name="filter-outline"
-          collapse="true"
+          name="add"
           slot="end"
           size="large"
         ></ion-icon>
-        <ion-icon class="icon" name="add" slot="end" size="large"></ion-icon>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
@@ -58,9 +85,16 @@
             routerLink="/product-detail/{{product.propertyId}}"
           >
             <ion-card-header class="product-header">
+              <ion-checkbox
+                *ngIf="show"
+                class="product-checkbox"
+                [(ngModel)]="chooseItems[i]"
+                checked="false"
+              ></ion-checkbox>
               <ion-card-subtitle class="product-header-image"
                 ><img src="{{product.image}}" alt="product scraped from amazon"
               /></ion-card-subtitle>
+
               <ion-card-title color="danger" class="product-title"
                 >{{product.title.slice(0,40)}}...</ion-card-title
               >
@@ -93,6 +127,12 @@
             routerLink="/product-detail/{{product.propertyId}}"
           >
             <ion-card-header class="product-header">
+              <ion-checkbox
+                *ngIf="show"
+                class="product-checkbox"
+                [(ngModel)]="chooseAlibabaItems[i]"
+                checked="false"
+              ></ion-checkbox>
               <ion-card-subtitle class="product-header-image"
                 ><img src="{{product.image}}" alt="product scraped from amazon"
               /></ion-card-subtitle>

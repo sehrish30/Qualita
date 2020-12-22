@@ -25,9 +25,13 @@ div {
   display: flex;
   flex-direction: column;
 
+  &-checkbox {
+    padding-right: 2px;
+  }
+
   &-title {
     font-size: 1.3rem;
-    padding-left: 10px;
+    padding-left: 1px;
     order: 2;
     flex-grow: 2;
     width: 5rem;

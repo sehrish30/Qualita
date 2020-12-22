@@ -71,7 +71,6 @@ export class ProductDetailPage implements OnInit {
        Delete comments
     -------------------------------------- */
   handleDeleteComment(productId, commentCreatedDate) {
-    debugger;
     this.FBSrv.amazonRef
       .doc(productId)
       .ref.get()
@@ -168,7 +167,6 @@ export class ProductDetailPage implements OnInit {
                 this.FBSrv.product.voteCount = voteCount;
               }
             } else {
-              debugger;
               const updatedVotes = [vote];
               const voteCount = updatedVotes.length;
               this.FBSrv.amazonRef

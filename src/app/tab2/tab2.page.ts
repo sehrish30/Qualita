@@ -1,7 +1,7 @@
 import { Storage } from '@ionic/storage';
 import { FbService } from './../fb.service';
 import { Component } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 declare var dynamics: any;
 
@@ -13,14 +13,72 @@ declare var dynamics: any;
 export class Tab2Page {
   public starredProducts = [];
   public checkStarredItems;
+  public chooseItems = [];
+  public chooseAlibabaItems = [];
+  public infoOfChooseItems = [];
+
+  public show = false;
+
+  public amazonCheck;
+  public alibabaCheck;
   constructor(
     public FBSrv: FbService,
     public storage: Storage,
-    public alertController: AlertController
+    public alertController: AlertController,
+    public navCtrl: NavController
   ) {
     // FBSrv.getStarredItems();
     FBSrv.getStarredProducts();
     console.log(FBSrv.starredItems);
+  }
+
+  /*----------------------------------------------------
+              Report
+  ------------------------------------------------------ */
+  selectProducts() {
+    this.show = true;
+  }
+
+  geneateReport() {
+    console.log(this.chooseItems);
+    this.FBSrv.starredProducts.map((data, i) => {
+      this.chooseItems.map((item, index) => {
+        if (i === index && item) {
+          this.infoOfChooseItems.push(data);
+        }
+      });
+
+      console.log(this.infoOfChooseItems);
+    });
+    this.amazonCheck = this.FBSrv.amazonProducts.subscribe((snapshot) => {
+      this.FBSrv.chosenItemsDetails = [];
+      snapshot.map((doc, index) => {
+        this.infoOfChooseItems.map((values, i) => {
+          if (values.itemID === doc.itemID) {
+            this.FBSrv.chosenItemsDetails.push({ ...doc, type: 'amazon' });
+          }
+        });
+      });
+      this.amazonCheck.unsubscribe();
+    });
+    this.alibabaCheck = this.FBSrv.alibabaProducts.subscribe((snapshot) => {
+      snapshot.map((doc, index) => {
+        this.infoOfChooseItems.map((values, i) => {
+          if (values.itemID === doc.itemID) {
+            this.FBSrv.chosenItemsDetails.push({ ...doc, type: 'alibaba' });
+          }
+        });
+      });
+      this.alibabaCheck.unsubscribe();
+      console.log(this.FBSrv.chosenItemsDetails);
+      this.navCtrl.navigateRoot('/report');
+    });
+  }
+
+  cancelSelection() {
+    this.chooseAlibabaItems = [];
+    this.chooseItems = [];
+    this.show = false;
   }
 
   deleteAllStarred() {

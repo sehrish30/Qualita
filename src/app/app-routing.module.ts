@@ -59,6 +59,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./trending/trending.module').then((m) => m.TrendingPageModule),
   },
+  {
+    path: 'report',
+    loadChildren: () =>
+      import('./report/report.module').then((m) => m.ReportPageModule),
+  },
 ];
 @NgModule({
   imports: [

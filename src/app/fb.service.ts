@@ -33,14 +33,18 @@ export class FbService {
   public checkStarredItems;
   public starredProducts = [];
   public product = {};
+  public chosenItemsDetails = [];
 
   amazonRef: AngularFirestoreCollection;
   alibabaRef: AngularFirestoreCollection<any>;
+  searchHistoryRef: AngularFirestoreCollection<any>;
+  reportHistoryRef: AngularFirestoreCollection<any>;
+
   comments: Observable<Comment[]>;
   amazonProducts: Observable<any>;
   alibabaProducts: Observable<any>;
-  searchHistoryRef: AngularFirestoreCollection<any>;
   searchHistory: Observable<any>;
+  reportHistory: Observable<any>;
 
   constructor(
     public firestore: AngularFirestore,
@@ -55,12 +59,10 @@ export class FbService {
     const authObserver = this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.currentUser = user;
-        console.log(this.currentUser.uid);
         console.log(this.currentUser.photoURL);
         // this.navCtrl.navigateForward('/');
         authObserver.unsubscribe();
       } else {
-        console.log('USER');
         this.currentUser = null;
         // this.navCtrl.navigateRoot('/signin');
         authObserver.unsubscribe();
@@ -74,6 +76,10 @@ export class FbService {
     this.amazonRef = firestore.collection('amazon');
     this.alibabaRef = firestore.collection('alibaba');
     this.searchHistoryRef = firestore.collection('history');
+    this.reportHistoryRef = firestore.collection('report');
+    this.reportHistory = this.reportHistoryRef.valueChanges({
+      idField: 'propertyId',
+    });
     this.searchHistory = this.searchHistoryRef.valueChanges({
       idField: 'propertyId',
     });
@@ -192,7 +198,6 @@ export class FbService {
     Get Starred Items starred Items from local storage
   ---------------------------------------------- */
   async getStarredItems() {
-    console.log('Now');
     try {
       const data = await this.storage.get('id');
       if (data) {
@@ -232,11 +237,10 @@ export class FbService {
     this.getStarredItems();
     this.checkStarredItems = this.amazonProducts.subscribe((collection) => {
       this.starredProducts = [];
-      console.log(this.starredItems);
+
       for (const doc of collection) {
         for (const stars of this.starredItems) {
           if (Number(doc.itemID) === Number(stars)) {
-            console.log(doc.itemID, stars);
             this.starredProducts.push(doc);
             break;
           }
@@ -245,17 +249,15 @@ export class FbService {
       this.checkStarredItems.unsubscribe();
     });
     this.checkStarredItems = this.alibabaProducts.subscribe((collection) => {
-      console.log(this.starredItems);
       for (const doc of collection) {
         for (const stars of this.starredItems) {
           if (Number(doc.itemID) === Number(stars)) {
-            console.log(doc.itemID, stars);
             this.starredProducts.push(doc);
             break;
           }
         }
       }
-      console.log(this.starredProducts);
+
       this.checkStarredItems.unsubscribe();
     });
   }

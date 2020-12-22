@@ -3,7 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { IonInfiniteScroll } from '@ionic/angular';
+import { IonInfiniteScroll, NavController } from '@ionic/angular';
 
 import { Storage } from '@ionic/storage';
 import { LoadingController } from '@ionic/angular';
@@ -17,16 +17,60 @@ export class Tab1Page {
   // comments: Comment;
   public showSegment = 'amazon';
   public starred = [];
+  public chooseItems = [];
+  public chooseAlibabaItems = [];
+  public show = false;
+
+  public amazonCheck;
+  public alibabaCheck;
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   constructor(
     public FBSrv: FbService,
     public loadingController: LoadingController,
-    public storage: Storage
+    public storage: Storage,
+    public navCtrl: NavController
   ) {
     // this.comments = {} as Comment;
     this.presentLoading();
     FBSrv.getStarredItems();
+  }
+
+  selectProducts() {
+    this.show = true;
+  }
+
+  geneateReport() {
+    console.log(this.chooseItems);
+    this.amazonCheck = this.FBSrv.amazonProducts.subscribe((snapshot) => {
+      this.FBSrv.chosenItemsDetails = [];
+      snapshot.map((doc, index) => {
+        this.chooseItems.map((values, i) => {
+          if (i === index) {
+            this.FBSrv.chosenItemsDetails.push({ ...doc, type: 'amazon' });
+          }
+        });
+      });
+      this.amazonCheck.unsubscribe();
+    });
+    this.alibabaCheck = this.FBSrv.alibabaProducts.subscribe((snapshot) => {
+      snapshot.map((doc, index) => {
+        this.chooseAlibabaItems.map((values, i) => {
+          if (i === index) {
+            this.FBSrv.chosenItemsDetails.push({ ...doc, type: 'alibaba' });
+          }
+        });
+      });
+      this.alibabaCheck.unsubscribe();
+      console.log(this.FBSrv.chosenItemsDetails);
+      this.navCtrl.navigateRoot('/report');
+    });
+  }
+
+  cancelSelection() {
+    this.chooseAlibabaItems = [];
+    this.chooseItems = [];
+    this.show = false;
   }
 
   loadData(event) {

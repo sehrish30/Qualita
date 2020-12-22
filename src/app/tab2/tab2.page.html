@@ -1,7 +1,34 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="toolbar">
-    <ion-buttons (click)="presentAlertConfirm()" collapse="true" slot="end">
-      <ion-icon slot="end" size="large" name="trash-outline"></ion-icon>
+    <ion-buttons collapse="true" slot="end">
+      <ion-icon
+        name="close-circle-outline"
+        slot="end"
+        *ngIf="show"
+        (click)="cancelSelection()"
+        size="large"
+      ></ion-icon>
+      <ion-icon
+        *ngIf="show"
+        name="reader-outline"
+        slot="end"
+        size="large"
+        (click)="geneateReport()"
+      ></ion-icon>
+      <ion-icon
+        *ngIf="!show"
+        (click)="selectProducts()"
+        class="icon"
+        name="add"
+        slot="end"
+        size="large"
+      ></ion-icon>
+      <ion-icon
+        (click)="presentAlertConfirm()"
+        slot="end"
+        size="large"
+        name="trash-outline"
+      ></ion-icon>
     </ion-buttons>
     <ion-title> Favorites </ion-title>
   </ion-toolbar>
@@ -10,13 +37,35 @@
 <ion-content [fullscreen]="true" color="primary">
   <ion-header collapse="condense">
     <ion-toolbar class="toolbar">
-      <ion-buttons
-        collapse="true"
-        slot="end"
-        size="large"
-        (click)="presentAlertConfirm()"
-      >
-        <ion-icon size="large" slot="end" name="trash-outline"></ion-icon>
+      <ion-buttons collapse="true" slot="end" size="large">
+        <ion-icon
+          name="close-circle-outline"
+          slot="end"
+          *ngIf="show"
+          (click)="cancelSelection()"
+          size="large"
+        ></ion-icon>
+        <ion-icon
+          *ngIf="show"
+          name="reader-outline"
+          slot="end"
+          size="large"
+          (click)="geneateReport()"
+        ></ion-icon>
+        <ion-icon
+          *ngIf="!show"
+          (click)="selectProducts()"
+          class="icon"
+          name="add"
+          slot="end"
+          size="large"
+        ></ion-icon>
+        <ion-icon
+          (click)="presentAlertConfirm()"
+          size="large"
+          slot="end"
+          name="trash-outline"
+        ></ion-icon>
       </ion-buttons>
       <ion-title>Favorites</ion-title>
     </ion-toolbar>
@@ -28,6 +77,12 @@
     routerLink="/product-detail/{{product.itemID}}"
   >
     <ion-card-header class="product-header">
+      <ion-checkbox
+        *ngIf="show"
+        class="product-checkbox"
+        [(ngModel)]="chooseItems[i]"
+        checked="false"
+      ></ion-checkbox>
       <ion-card-subtitle class="product-header-image"
         ><img src="{{product.image}}" alt="product scraped from amazon"
       /></ion-card-subtitle>
