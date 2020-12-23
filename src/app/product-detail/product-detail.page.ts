@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController, NavController } from '@ionic/angular';
 import { ReversePipe } from 'ngx-pipes';
-
+import { Plugins } from '@capacitor/core';
+const { Share } = Plugins;
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.page.html',
@@ -217,6 +218,18 @@ export class ProductDetailPage implements OnInit {
           }
         });
     }
+  }
+
+  /*------------------------------------
+       Share Product
+    -------------------------------------- */
+  async basicShare() {
+    let shareRet = await Share.share({
+      title: `${this.FBSrv.product.title}`,
+      text: `${this.FBSrv.product.price} Price ${this.FBSrv.product.rating} Rating`,
+      url: `https://product-detail/${this.FBSrv.product.itemID}`,
+      dialogTitle: 'Share with buddies',
+    });
   }
 
   ngOnInit() {}
