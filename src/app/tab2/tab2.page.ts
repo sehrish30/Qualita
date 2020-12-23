@@ -39,6 +39,14 @@ export class Tab2Page {
     this.show = true;
   }
 
+  // storeReportHistoryToFirestore() {
+  //   this.FBSrv.reportHistoryRef.add({
+  //     userID: this.FBSrv.currentUser.uid,
+  //     time: new Date(),
+  //     products: this.FBSrv.chosenItemsDetails,
+  //   });
+  // }
+
   geneateReport() {
     console.log(this.chooseItems);
     this.FBSrv.starredProducts.map((data, i) => {
@@ -72,6 +80,7 @@ export class Tab2Page {
       this.alibabaCheck.unsubscribe();
       console.log(this.FBSrv.chosenItemsDetails);
       this.navCtrl.navigateRoot('/report');
+      this.FBSrv.storeReportHistoryToFirestore();
     });
   }
 

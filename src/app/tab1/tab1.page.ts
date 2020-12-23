@@ -64,7 +64,9 @@ export class Tab1Page {
       this.alibabaCheck.unsubscribe();
       console.log(this.FBSrv.chosenItemsDetails);
       this.navCtrl.navigateRoot('/report');
+      this.FBSrv.storeReportHistoryToFirestore();
     });
+    console.log(this.FBSrv.chosenItemsDetails);
   }
 
   cancelSelection() {

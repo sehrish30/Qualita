@@ -77,6 +77,7 @@ export class FbService {
     this.alibabaRef = firestore.collection('alibaba');
     this.searchHistoryRef = firestore.collection('history');
     this.reportHistoryRef = firestore.collection('report');
+
     this.reportHistory = this.reportHistoryRef.valueChanges({
       idField: 'propertyId',
     });
@@ -101,6 +102,18 @@ export class FbService {
 
   RemoveFB(id): Promise<any> {
     return this.alibabaRef.doc(id).delete();
+  }
+
+  /*-------------------------------------------
+          Store items in firebase
+  ---------------------------------------------- */
+  storeReportHistoryToFirestore() {
+    this.reportHistoryRef.add({
+      userId: this.currentUser.uid,
+      userName: this.currentUser.displayName,
+      time: new Date(),
+      products: this.chosenItemsDetails,
+    });
   }
 
   /*-------------------------------------------

@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { FbService } from './../fb.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Chart } from 'chart.js';
@@ -21,17 +22,52 @@ export class ReportPage implements OnInit {
   public rating = [];
   public votes = [];
 
-  constructor(public FbSrv: FbService) {
-    FbSrv.chosenItemsDetails.map((data) => {
-      this.labels.push(data.title.slice(0, 10));
-      this.price.push(data.price);
-      this.rating.push(data.rating.slice(0, 3));
-      this.votes.push(data.voteCount);
-      console.log(this.price);
-      console.log(this.rating);
-      console.log(this.labels);
-      console.log(this.votes);
+  public time;
+
+  constructor(public FbSrv: FbService, public activatedrouter: ActivatedRoute) {
+    this.time = this.activatedrouter.snapshot.paramMap.get('products');
+
+    this.FbSrv.reportHistory.subscribe((snapshot) => {
+      snapshot.map((data) => {
+        // console.log(
+        //   data.time.nanoseconds,
+        //   this.time.slice(13, this.time.length)
+        // );
+
+        console.log(FbSrv.chosenItemsDetails);
+        console.log(data);
+        if (
+          this.time &&
+          Number(data.time.nanoseconds) ===
+            Number(this.time.slice(13, this.time.length))
+        ) {
+          FbSrv.chosenItemsDetails = [];
+          FbSrv.chosenItemsDetails.push(...data.products);
+          // debugger;
+          console.log(data.products);
+          data.products.map((item) => {
+            this.labels.push(item.title.slice(0, 10));
+            this.price.push(item.price);
+            this.rating.push(item.rating.slice(0, 3));
+            this.votes.push(item.voteCount);
+            // FbSrv.chosenItemsDetails = [];
+          });
+        }
+      });
     });
+
+    if (!this.time) {
+      FbSrv.chosenItemsDetails.map((data) => {
+        this.labels.push(data.title.slice(0, 10));
+        this.price.push(data.price);
+        this.rating.push(data.rating.slice(0, 3));
+        this.votes.push(data.voteCount);
+        console.log(this.price);
+        console.log(this.rating);
+        console.log(this.labels);
+        console.log(this.votes);
+      });
+    }
   }
 
   ngOnInit() {

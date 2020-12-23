@@ -27,6 +27,7 @@ export class EditCommentPage implements OnInit {
     if (!this.FBSrv.currentUser) {
       this.navCtrl.navigateRoot('/signin');
     } else {
+      debugger;
       this.FBSrv.amazonRef
         .doc(this.index)
         .ref.get()

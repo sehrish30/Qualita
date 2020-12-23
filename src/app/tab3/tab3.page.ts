@@ -61,7 +61,7 @@ export class Tab3Page {
     if (this.FBSrv.currentUser.uid) {
       const data = {
         userId: this.FBSrv.currentUser.uid,
-        userName: this.FBSrv.currentUser.uid,
+        userName: this.FBSrv.currentUser.displayName,
         searchTerm: this.filter,
         time: new Date(),
       };

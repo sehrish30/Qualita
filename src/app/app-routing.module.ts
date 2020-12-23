@@ -54,6 +54,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./history/history.module').then((m) => m.HistoryPageModule),
   },
+
   {
     path: 'trending',
     loadChildren: () =>
@@ -61,6 +62,11 @@ const routes: Routes = [
   },
   {
     path: 'report',
+    loadChildren: () =>
+      import('./report/report.module').then((m) => m.ReportPageModule),
+  },
+  {
+    path: 'report/:products',
     loadChildren: () =>
       import('./report/report.module').then((m) => m.ReportPageModule),
   },

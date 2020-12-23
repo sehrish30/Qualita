@@ -64,6 +64,39 @@
         </ion-item-sliding>
       </ion-list>
     </div>
-    <div *ngSwitchCase="'report'">Habiba work here</div>
+    <div *ngSwitchCase="'report'">
+      <ion-list
+        class="ion-no-padding"
+        color="primary"
+        *ngFor="let report of userReports; let i = index"
+        routerLink="/report/{{report.time}}"
+      >
+        <ion-item-sliding color="primary">
+          <ion-item color="primary">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  <strong>{{report.products.length}}</strong>
+                </ion-col>
+                <ion-col class="ion-padding-start ion-text-right">
+                  {{" "}}{{" "}}{{report.time | timeAgo}}<ion-icon
+                    *ngIf="FBSrv.currentUser?.uid === search?.userId"
+                    style="vertical-align: middle"
+                    name="time-outline"
+                  ></ion-icon>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+          <ion-item-options side="end" color="primary">
+            <ion-item-option
+              color="primary"
+              (click)="deletethisReport(report.propertyId)"
+              ><ion-icon name="trash-outline"></ion-icon
+            ></ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </div>
   </div>
 </ion-content>
