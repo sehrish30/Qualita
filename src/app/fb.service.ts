@@ -1,3 +1,4 @@
+import { AngularFireStorage } from '@angular/fire/storage';
 import { NavController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -46,11 +47,14 @@ export class FbService {
   searchHistory: Observable<any>;
   reportHistory: Observable<any>;
 
+  public filePath = 'dp';
+
   constructor(
     public firestore: AngularFirestore,
     public afAuth: AngularFireAuth,
     public navCtrl: NavController,
-    public storage: Storage
+    public storage: Storage,
+    private firestorage: AngularFireStorage
   ) {
     /*-------------------------------------------
               Context Provider
@@ -94,6 +98,7 @@ export class FbService {
     // amazonProducts: Observable<any>
     // this.amazonProducts = this.firestore.collection('alibaba').valueChanges()
   }
+  // public storageRef = this.firestorage.ref(this.filePath).child(`${this.currentUser.uid}`);
 
   // for inserting in firebase
   InsertFB(com): Promise<any> {

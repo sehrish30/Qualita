@@ -43,7 +43,6 @@ export class ReportPage implements OnInit {
         ) {
           FbSrv.chosenItemsDetails = [];
           FbSrv.chosenItemsDetails.push(...data.products);
-          // debugger;
           console.log(data.products);
           data.products.map((item) => {
             this.labels.push(item.title.slice(0, 10));
@@ -62,10 +61,6 @@ export class ReportPage implements OnInit {
         this.price.push(data.price);
         this.rating.push(data.rating.slice(0, 3));
         this.votes.push(data.voteCount);
-        console.log(this.price);
-        console.log(this.rating);
-        console.log(this.labels);
-        console.log(this.votes);
       });
     }
   }

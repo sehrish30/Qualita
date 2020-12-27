@@ -15,7 +15,7 @@ import { LoadingController } from '@ionic/angular';
 })
 export class Tab1Page {
   // comments: Comment;
-  public showSegment = 'amazon';
+  public showSegment = 'alibaba';
   public starred = [];
   public chooseItems = [];
   public chooseAlibabaItems = [];

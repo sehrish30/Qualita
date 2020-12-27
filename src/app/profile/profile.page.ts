@@ -9,6 +9,7 @@ import { FbService } from './../fb.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+  public seed;
   constructor(
     public toastController: ToastController,
     public fbSrv: FbService,
@@ -18,6 +19,7 @@ export class ProfilePage implements OnInit {
     if (!this.fbSrv.currentUser?.uid) {
       this.navCtrl.navigateForward('signin');
     }
+    this.seed = Math.floor(Math.random() * 5000);
   }
 
   ngOnInit() {}

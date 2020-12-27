@@ -20,6 +20,7 @@ export class ProductDetailPage implements OnInit {
   public product: {} = {} as any;
   public go = false;
   public showSegrment = 'amazon';
+  public seed;
 
   constructor(
     public firestore: AngularFirestore,
@@ -28,6 +29,7 @@ export class ProductDetailPage implements OnInit {
     public modalController: ModalController,
     public navCtrl: NavController
   ) {
+    this.seed = Math.floor(Math.random() * 5000);
     this.FBSrv.getStarredItems();
     /*------------------------------------
       Get id from route
