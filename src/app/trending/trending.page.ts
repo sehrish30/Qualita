@@ -11,7 +11,7 @@ import { ActivatedRouteSnapshot } from '@angular/router';
 @Component({
   selector: 'app-trending',
   templateUrl: './trending.page.html',
-  styleUrls: ['./trending.page.scss'],
+  styleUrls: ['./trendipng.page.scss'],
 })
 export class TrendingPage implements OnInit {
   public trendingProducts: [] = [];

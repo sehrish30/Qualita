@@ -226,6 +226,7 @@ export class ProductDetailPage implements OnInit {
        Share Product
     -------------------------------------- */
   async basicShare() {
+    // debugger;
     let shareRet = await Share.share({
       title: `${this.FBSrv.product.title}`,
       text: `${this.FBSrv.product.price} Price ${this.FBSrv.product.rating} Rating`,
